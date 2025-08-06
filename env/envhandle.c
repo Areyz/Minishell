@@ -6,11 +6,36 @@
 /*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 16:52:24 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/05 19:56:35 by mgolasze         ###   ########.fr       */
+/*   Updated: 2025/08/06 22:08:48 by mgolasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	**rebuild_env(t_enviro *enviro)
+{
+	char		**ret;
+	t_enviro	*tmp;
+	int			i;
+
+	tmp = enviro;
+	i = 0;
+	while (tmp != NULL)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	ret = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (enviro != NULL)
+	{
+		ret[i] = (ft_strdup(enviro->content));
+		enviro = enviro->next;
+		i++;
+	}
+	ret[i] = NULL;
+	return (ret);
+}
 
 //initialization of environmental "tokens"
 t_enviro	*ft_lstnew_env(char *content)
