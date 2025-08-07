@@ -6,7 +6,7 @@
 /*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 22:10:13 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/06 22:53:21 by mgolasze         ###   ########.fr       */
+/*   Updated: 2025/08/07 21:55:18 by mgolasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,47 @@ void	export(t_global *global, t_token *token)
 	if (!lst)
 		return ;
 	enviro = global->enviro;
-	while (enviro != NULL)
-		enviro = enviro->next;
-	to_copy = ft_strdup(token->history);
-	lst.content = to_copy;
-	enviro->next = lst;
-	lst->next = NULL;
+	if (export_replace(global, token))
+		return ;
+	else
+	{
+		while (enviro -> next != NULL)
+			enviro = enviro->next;
+		to_copy = ft_strdup(token->history);
+		lst.content = to_copy;
+		enviro->next = lst;
+		lst->next = NULL;
+	}
 }
 
-void export_replace(t_global *global, t_token *token)
+int	export_replace(t_global *global, t_token *token)
 {
 	char	*to_replace;
 
-	if (token->next->next->type = 'value' && token->content = "export")
-		to_replace = ft_strdup(token->next->next->content);
-	
-	while(token->next != NULL)
+	if (ft_strncmp(global->content, token->history, ft_strlen(token->history)))
+		to_replace = get_key(token->history);
+	while(token -> next != NULL)
 	{
-		if ()
+		if (ft_strncmp(global->content, to_replace, ft_strlen(to_replace)))
+		{
+			global->content = realloc(sizeof(char *) * (ft_strlen(to_replace)));
+			if (!global->content)
+				error_exit(global, ENOMEM);
+			return (1);
+		}
+		global = global->next;
 	}
+	return (0);
+}
+
+char	*get_key(char *str)
+{
+	int		i;
+	char	*key;
+
+	i = 0;
+	while (str[i] != "=" && str[i])
+		i++;
+	key = ft_strldup(str, i);
+	return (key);
 }
