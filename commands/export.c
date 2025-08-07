@@ -29,3 +29,16 @@ void	export(t_global *global, t_token *token)
 	enviro->next = lst;
 	lst->next = NULL;
 }
+
+void export_replace(t_global *global, t_token *token)
+{
+	char	*to_replace;
+
+	if (token->next->next->type = 'value' && token->content = "export")
+		to_replace = ft_strdup(token->next->next->content);
+	
+	while(token->next != NULL)
+	{
+		if ()
+	}
+}
