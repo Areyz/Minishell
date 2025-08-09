@@ -6,7 +6,7 @@
 /*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 22:10:13 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/07 21:55:18 by mgolasze         ###   ########.fr       */
+/*   Updated: 2025/08/09 22:50:57 by mgolasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,17 @@ void	export(t_global *global, t_token *token)
 	t_enviro	*lst;
 	char		*to_copy;
 
-	lst = malloc(sizeof(t_enviro));
-	if (!lst)
-		return ;
 	enviro = global->enviro;
 	if (export_replace(global, token))
 		return ;
 	else
 	{
-		while (enviro -> next != NULL)
+		lst = malloc(sizeof(t_enviro));
+		if (!lst)
+			return ;
+		while (enviro != NULL && enviro -> next != NULL)
 			enviro = enviro->next;
-		to_copy = ft_strdup(token->history);
-		lst.content = to_copy;
+		lst->content = ft_strdup(token->history);
 		enviro->next = lst;
 		lst->next = NULL;
 	}
@@ -37,32 +36,48 @@ void	export(t_global *global, t_token *token)
 
 int	export_replace(t_global *global, t_token *token)
 {
-	char	*to_replace;
+	char		*to_replace;
+	char		*to_compare;
+	t_enviro	*enviro;
 
-	if (ft_strncmp(global->content, token->history, ft_strlen(token->history)))
-		to_replace = get_key(token->history);
-	while(token -> next != NULL)
+	enviro = global->enviro;
+	to_replace = get_key(token->history);
+	while (enviro != NULL)
 	{
-		if (ft_strncmp(global->content, to_replace, ft_strlen(to_replace)))
+		to_compare = get_key(enviro->content);
+		if ((ft_strncmp(to_compare, to_replace, ft_strlen(to_replace)) == 0))
 		{
-			global->content = realloc(sizeof(char *) * (ft_strlen(to_replace)));
-			if (!global->content)
+			free(enviro->content);
+			enviro->content = ft_strdup(token->history);
+			if (!enviro->content)
 				error_exit(global, ENOMEM);
+			free(to_compare);
+			free(to_replace);
 			return (1);
 		}
-		global = global->next;
+		free(to_compare);
+		enviro = enviro->next;
 	}
+	free(to_replace);
 	return (0);
 }
 
 char	*get_key(char *str)
 {
 	int		i;
+	int		l;
 	char	*key;
 
 	i = 0;
-	while (str[i] != "=" && str[i])
+	l = 0;
+	while (str[i] != '=' && str[i])
 		i++;
-	key = ft_strldup(str, i);
+	key = malloc(i + 1);
+	while (l < i)
+	{
+		key[l] = str[l];
+		l++;
+	}
+	key[l] = '\0';
 	return (key);
 }
