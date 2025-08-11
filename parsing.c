@@ -6,14 +6,14 @@
 /*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 18:55:22 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/07/30 20:28:50 by mgolasze         ###   ########.fr       */
+/*   Updated: 2025/08/11 17:23:21 by mgolasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 //Copying from argv into the struct history and categorising them
-void	parsing(char *str, t_token parser)
+void	parsing(char *str, t_token *parser)
 {
 	int	i;
 
@@ -29,15 +29,15 @@ void	parsing(char *str, t_token parser)
 	else if ((str[0] == '>' && str[1] == '>'))
 		parser.type = "double pipe operator";
 	else if ((str[0] == '<' && str[1] == '<'))
-		parser.type = "double pipe operator";
-	else if (//function to check if the command is valid)
+		parser.type = "here_doc";
+	else if //function to check if the command is valid)
 		parser.type = "command";
 	else
 		parser.type = "value";
 }
 
 //Function for checking if our command or external one and executing it
-void isourcommand(t_token parser)
+void isourcommand(t_token *parser)
 {
 	if (parser.type = "command")
 	{
@@ -59,6 +59,3 @@ void isourcommand(t_token parser)
 			execute_other_command();
 	}
 }
-
-./MINISHELL
-sleep 3

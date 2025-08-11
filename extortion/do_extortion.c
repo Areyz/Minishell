@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   do_extortion.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 20:02:55 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/11 17:23:23 by mgolasze         ###   ########.fr       */
+/*   Created: 2025/08/10 20:25:25 by mgolasze          #+#    #+#             */
+/*   Updated: 2025/08/11 17:24:25 by mgolasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_global	global_init(char **envp)
+void	do_extortion(t_global global, t_token token)
 {
-	t_enviro	*enviro;
+	t_extortion	exor;
 
-	enviro = env_init(envp);
-	global->enviro = enviro;
-	return (global);
+	extor->pipe_count = token->pipe_count;
+	while	(token)
+	{
+		while (!ft_strncmp(token->content, "|", 1) && token)
+		{
+			if (ft_strncmp(token->content, "|", 1))
+			{
+				pipe_count++;
+			}
+			
+		}
+	}
 }
 
-//Main function - to do - add Sigur loop and commands and states (ctrl - c etc)
-int	main(int argc, char *argv[], char *envp[])
+int	isoperator(char *str)
 {
-	t_global	global;
+	int	i;
 
-	void (argc);
-	global = global_init(envp);
-	lexer(argv);
-	return (0);
+	if (ft_strncmp(str, "<", 1))
 }

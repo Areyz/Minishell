@@ -6,7 +6,7 @@
 /*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 17:59:40 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/09 22:50:44 by mgolasze         ###   ########.fr       */
+/*   Updated: 2025/08/11 17:23:33 by mgolasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,46 @@ static int	is_valid_command(char *cmd)
 	return (cmd[i] != '\0');
 }
 
-void	error_exit(int code, char *message)
+void do_pipe(t_extortion extortion, t_global *global)
 {
-	errno = code;
-	perror(message);
-	exit(EXIT_FAILURE);
-}
+	int			pipe_fd[2];
+	pid_t		pid;
 
-void do_pipe(int argc, char *argv[], char *envp[])
-{
-	int		pipe_fd[2];
-	pid_t	pid;
-
-	if (argc != 5)
-		error_exit(EINVAL, "Usage: file 1 cmd1 cmd2 file2\n");
-	if (is_valid_command(argv[3]) == 0)
-		error_exit(EINVAL, "Empty command");
-	if (is_valid_command(argv[2]) == 0)
+	if (is_valid_command(extortion->extortion))
 		error_exit(EINVAL, "Empty command");
 	if (pipe(pipe_fd) == -1)
-		error_exit(EAGAIN, "pipe error");
+		error_exit(EAGAIN, "Pipe error");
 	pid = fork();
 	if (pid == -1)
-		error_exit(EAGAIN, "fork error");
-	if (pid == 0)
-		input_process(argv[1], argv[2], pipe_fd, envp);
+		error_exit(EAGAIN, "Fork error");
+	if (extortion->direction == 0 && pid == 0)
+		default_process(extortion, pipe_fd, global)
+	else if (extortion->direction == 1 && pid == 0)
+		input_process(extortion, pipe_fd, global);
+	else if (((extortion->direction == 2) || (extortion->direction == 2)) && pid == 0)
+		output_process(argv[4], argv[3], pipe_fd, envp);
 	else
 	{
-		wait(NULL);
-		output_process(argv[4], argv[3], pipe_fd, envp);
+		waitpid(pid, &status, 0);
 	}
-	return (0);
 }
+
+void	pipe_exe(t_global global)
+{
+	int		i;
+	int		l;
+	t_token	token;
+
+	i = token->pipe_counter + 1;
+	l = 0;
+	while (l < i)
+	{
+		do_pipe(extortion);
+		extortion->next;
+		l++;
+	}
+}
+
+
+if (token.type == >)
+	extortion->direction == 1;
