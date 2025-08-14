@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	do_extortion(t_global global, t_token token)
 {
-	t_extortion	exor;
+	t_extortion	extor;
 
 	extor->pipe_count = token->pipe_count;
 	while	(token)

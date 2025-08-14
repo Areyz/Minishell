@@ -3,16 +3,14 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = minishell
 RM = rm -f
 SRC = 	main \
-		lexer \
-		parsing \
-		utils \
-		extortion/do_extortion \
+		#extortion/do_extortion \
 		env/childpar \
 		env/do_pipe \
 		env/envhandle \
 		env/findpath \
 		commands/export \
 		commands/export&env
+#utils \ lexer \ parsing 
 
 SRCS = $(addsuffix .c, $(SRC))
 OBJS = $(SRCS:.c=.o)
@@ -21,7 +19,7 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -lreadline
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)

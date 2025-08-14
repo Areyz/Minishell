@@ -15,10 +15,12 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <sys/stat.h>
 # include <signal.h>
 # include "libft.h"
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 //# include "pipex.h"
 
 typedef struct s_token
