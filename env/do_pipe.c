@@ -56,7 +56,7 @@ void	pipe_exe(t_global global)
 
 	i = token->pipe_counter + 1;
 	l = 0;
-	while (l < i)
+	while (l < i) //extortion->next
 	{
 		do_pipe(extortion);
 		extortion->next;

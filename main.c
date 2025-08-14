@@ -25,9 +25,20 @@ t_global	global_init(char **envp)
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_global	global;
-
-	void (argc);
+	
+	//global = NULL;
+	(void) argc;
 	global = global_init(envp);
 	lexer(argv);
+
+	//
+	while (42)
+	{
+		// 1) read
+		// 2) lexer/parser
+		// 3) execute
+		
+	}
+
 	return (0);
 }
