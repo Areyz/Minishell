@@ -10,7 +10,7 @@ SRC = 	main \
 		env/findpath \
 		commands/export \
 		commands/export&env
-#utils \ lexer \ parsing 
+#utils \ lexer \ parsing  
 
 SRCS = $(addsuffix .c, $(SRC))
 OBJS = $(SRCS:.c=.o)
