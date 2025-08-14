@@ -19,6 +19,8 @@ char	lexer(char **argv)
 	t_token		next;
 	t_token		new;
 
+	ft_lstadd_back
+
 	i = 1;
 	while (argv[i])
 	//todo - linked list with next and prev

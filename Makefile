@@ -3,14 +3,15 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = minishell
 RM = rm -f
 SRC = 	main \
-		#extortion/do_extortion \
+		lexer
+#extortion/do_extortion \
 		env/childpar \
 		env/do_pipe \
 		env/envhandle \
 		env/findpath \
 		commands/export \
 		commands/export&env
-#utils \ lexer \ parsing
+#utils \ parsing
 
 SRCS = $(addsuffix .c, $(SRC))
 OBJS = $(SRCS:.c=.o)

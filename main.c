@@ -41,6 +41,7 @@ int	main(int argc, char **argv, char **envp)
 		// 1) read
 		r_line = readline("minishell >> ");
 		printf("%s\n", r_line); //for tests
+		lexer(r_line);
 
 		// 2) lexer/parser
 		// 3) execute
