@@ -3,34 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 19:46:06 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 19:47:38 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/10 13:24:08 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/10 13:24:09 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*result;
-	unsigned int	i;
+	size_t	size;
+	char	*newstr;
+	size_t	i;
 
-	if (!s || !f)
+	size = ft_strlen(s);
+	newstr = malloc(size + 1);
+	if (!newstr)
 		return (NULL);
 	i = 0;
-	while (s[i])
-		i++;
-	result = (char *) malloc((i + 1) * sizeof(char));
-	if (!result)
-		return (NULL);
-	i = 0;
-	while (s[i])
+	while (i < size)
 	{
-		result[i] = f(i, s[i]);
+		newstr[i] = (*f)(i, s[i]);
 		i++;
 	}
-	result[i] = '\0';
-	return (result);
+	newstr[i] = '\0';
+	return (newstr);
 }
+
+/*
+#include <stdio.h>
+
+char func(unsigned int i, char c)
+{
+	return ft_toupper(c);
+}
+
+int main()
+{
+	char *str = "abcd";
+	printf("str = %s\n", str);
+	char *newstr = ft_strmapi(str, func);
+	printf("newstr = %s\n", newstr);
+	return 0;
+}
+*/

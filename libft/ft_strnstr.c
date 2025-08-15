@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 19:51:27 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 19:52:49 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/06 14:51:07 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/06 14:51:08 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,42 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
 	size_t	j;
+	size_t	needle_len;
 
-	j = 0;
+	if (!*little)
+		return ((char *)big);
 	i = 0;
-	if (little[i] == '\0')
-		return ((char *) big);
-	while (big[i] && i < len)
+	j = 0;
+	needle_len = ft_strlen(little);
+	while (i < len && big[i])
 	{
 		j = 0;
-		if (big[i] == little[j])
-		{
-			while (big[i + j] == little[j] && i + j < len)
-			{
-				j++;
-			}
-			if (little[j] == '\0')
-				return ((char *) &big[i]);
-		}
+		while (i + j < len && big[i + j] == little[j] && little[j])
+			j++;
+		if (j == needle_len)
+			return ((char *)&big[i]);
 		i++;
 	}
 	return (NULL);
 }
+
+/*
+#include <stdio.h>
+int main()
+{
+	char *big = "Hello, worldee!";
+	char *little = "";
+	int len = 14;
+	char *result = ft_strnstr(big, little, len);
+
+	if (result)
+	{
+		printf("Found: %s\n", result); // Output: Found: world!
+	}
+	else
+	{
+		printf("NULL\n");
+	}
+	return 0;
+}
+*/

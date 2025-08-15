@@ -1,46 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 17:32:27 by kjamrosz          #+#    #+#             */
-/*   Updated: 2024/12/06 17:32:27 by kjamrosz         ###   ########.fr       */
+/*   Created: 2024/12/17 10:32:59 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/17 10:33:00 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *src)
+t_list	*ft_lstnew(void *content)
 {
-	char	*dest;
-	char	*tempdest;
+	t_list	*new;
 
-	dest = malloc(sizeof(char) * (ft_strlen(src) + 1));
-	if (!dest)
+	new = (t_list *) malloc(sizeof(t_list));
+	if (!new)
 		return (NULL);
-	tempdest = dest;
-	while (*src)
-		*dest++ = *src++;
-	*dest = '\0';
-	return (tempdest);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }
 
 /*
-#include <unistd.h>
 #include <stdio.h>
-int main () 
+int main()
 {
-   char *str = "";//works with this
-   //doesn't work when we use char *c = "Hello";
+	int v1 = 10, v2 = 20, v3 = 30;
+	t_list *first = ft_lstnew(&v1);
+    first->next = ft_lstnew(&v2);
+    first->next->next = ft_lstnew(&v3);
+	// This will create: 10 -> 20 -> 30 -> NULL
 
-   printf("string: %s\n",str);
+	t_list *temp = first;
 
-   char *newstr = ft_strdup(str);
-   printf("newstr: %s\n", newstr);
-   
-   return(0);
+	while (temp)
+	{
+		printf("Node content: %d\n", *(int *)(temp->content));
+		temp = temp->next;
+	}	
+
+	return (0);
 }
 */

@@ -3,43 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 19:30:31 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 22:13:17 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/05 10:47:07 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/05 10:47:08 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_speciallen(const char *str, size_t max_len)
+size_t	ft_strlcat(char *dst, char *src, unsigned int size)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i] && i < max_len)
-		i++;
-	return (i);
-}
-
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
-	size_t	dst_len;
 	size_t	src_len;
+	size_t	dst_len;
 
-	dst_len = ft_speciallen(dst, dstsize);
-	src_len = ft_speciallen(src, SIZE_MAX);
-	if (dstsize == 0)
-		return (src_len);
-	if (dstsize <= dst_len)
-		return (dstsize + src_len);
-	i = 0;
-	while (i < dstsize - dst_len - 1 && src[i])
+	if (!dst && !size)
+		return (0);
+	src_len = ft_strlen(src);
+	dst_len = ft_strlen(dst);
+	if (dst_len >= size)
+		dst_len = size;
+	if (dst_len == size)
+		return (size + src_len);
+	if (src_len < size - dst_len)
+		ft_memcpy(dst + dst_len, src, src_len + 1);
+	else
 	{
-		dst[dst_len + i] = src[i];
-		i++;
+		ft_memcpy(dst + dst_len, src, size - dst_len - 1);
+		dst[size - 1] = '\0';
 	}
-	dst[dst_len + i] = '\0';
 	return (dst_len + src_len);
 }
+
+/*
+#include <stdio.h>
+
+int main() {
+    char dest[6] = "Hello";
+    char src[] = ", world!";
+    unsigned int size = sizeof(dest);
+
+    unsigned int total_length = ft_strlcat(dest, src, size);
+    printf("Result: %s\n", dest); // Output: Hello, world!
+    printf("Total length: %u\n", total_length); // Output: 13
+
+    return 0;
+}
+*/

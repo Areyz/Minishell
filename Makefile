@@ -3,7 +3,8 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = minishell
 RM = rm -f
 SRC = 	main \
-		lexer
+		lexer \
+		env/envhandle
 #extortion/do_extortion \
 		env/childpar \
 		env/do_pipe \

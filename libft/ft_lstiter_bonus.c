@@ -1,43 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 14:18:28 by kjamrosz          #+#    #+#             */
-/*   Updated: 2024/12/06 14:18:29 by kjamrosz         ###   ########.fr       */
+/*   Created: 2024/12/17 14:58:33 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/17 14:58:34 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	int		diff;
-	size_t	i;
+	t_list	*temp;
 
-	i = 0;
-	while (i < n)
+	temp = lst;
+	while (temp)
 	{
-		diff = (unsigned char)s1[i] - (unsigned char)s2[i];
-		if (diff != 0 || s1[i] == '\0')
-			return (diff);
-		i++;
+		f(temp->content);
+		temp = temp->next;
 	}
-	return (0);
 }
 
 /*
 #include <stdio.h>
-#include "libft.h"
+void func(void *lst)
+{
+	int *num;
+
+	num = (int *)(lst);
+	printf("%d\n", *num+2);
+}
+
 
 int main()
 {
-	int	n = 5;
-	char* s1 = "Hello";
-	char* s2 = "Hello";
-	printf("%d\n", ft_strncmp(s1, s2, n));
-	return 0;
+	int v1 = 10, v2 = 20, v3 = 30;
+	t_list *first = ft_lstnew(&v1);
+    first->next = ft_lstnew(&v2);
+    first->next->next = ft_lstnew(&v3);
+	// This will create: 10 -> 20 -> 30 -> NULL
+
+	t_list *temp = first;
+
+	ft_lstiter(first, &func);
+
+	return (0);
 }
 */

@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <stdbool.h>
 //# include "pipex.h"
 
 typedef struct s_token
@@ -33,8 +34,8 @@ typedef struct s_token
 
 typedef struct s_enviro
 {
-	char			*content;
-	struct s_enviro	*next;
+	char			**nam_and_val;
+	//struct s_enviro	*next;
 }	t_enviro;
 
 typedef struct s_global
@@ -45,9 +46,9 @@ typedef struct s_global
 void		parsing(char *str, t_token parser);
 void		isourcommand(t_token parser);
 void		error_exit(t_global *parsing);
-char		lexer(char **argv);
+void		lexer(char *r_line);
 char		**rebuild_env(t_enviro *enviro);
 t_enviro	*ft_lstnew_env(char *content);
-t_enviro	*env_init(char *envp[]);
+t_enviro	*env_init(char **envp);
 
 #endif

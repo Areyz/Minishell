@@ -1,29 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 13:26:38 by kjamrosz          #+#    #+#             */
-/*   Updated: 2024/12/10 13:26:39 by kjamrosz         ###   ########.fr       */
+/*   Created: 2024/12/17 11:37:04 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/17 11:37:04 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	ft_putstr_fd(s, fd);
-	write(fd, "\n", 1);
+	new->next = *lst;
+	*lst = new;
 }
 
 /*
-int main () 
+#include <stdlib.h>
+#include <stdio.h>
+int main()
 {
-	char *str = "hello";
-	ft_putendl_fd(str, 1);
-	return(0);
+	int v1 = 10, v2 = 20, v3=40;
+	t_list *first = ft_lstnew(&v1);
+    first->next = ft_lstnew(&v2);
+
+	t_list *new = ft_lstnew(&v3);
+
+	ft_lstadd_front(&first, new);
+
+	t_list *temp = first;
+
+	while (temp)
+	{
+		printf("Node content: %d\n", *(int *)(temp->content));
+		temp = temp->next;
+	}	
+
+	return (0);
 }
 */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 21:12:56 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 21:12:59 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/03 11:43:24 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/03 11:43:25 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	ft_isprint(int c)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	return (0);
+	if (!(c >= 32 && c <= 126))
+	{
+		return (0);
+	}
+	return (1);
 }

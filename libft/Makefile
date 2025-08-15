@@ -1,34 +1,56 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+.PHONY: all clean
+
+SRC = $(addsuffix .c, ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint ft_strlen ft_memset ft_bzero ft_memcpy ft_memmove ft_strlcpy ft_strlcat ft_toupper ft_tolower ft_strchr ft_strrchr ft_strncmp ft_memchr ft_memcmp ft_strnstr ft_atoi ft_calloc ft_strdup)
+
+OBJS := $(SRC:%.c=%.o)
+
+SUPP_SRC = $(addsuffix .c, ft_substr ft_strjoin ft_strtrim ft_split ft_itoa ft_strmapi ft_striteri ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd)
+
+SUPP_OBJS := $(SUPP_SRC:%.c=%.o)
+
+BONUS_SRC = $(addsuffix _bonus.c, ft_lstnew ft_lstadd_front ft_lstsize ft_lstlast ft_lstadd_back ft_lstdelone ft_lstclear ft_lstiter ft_lstmap)
+
+BONUS_OBJS := $(BONUS_SRC:%.c=%.o)
 
 NAME = libft.a
-SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
-       ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c \
-       ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c \
-       ft_calloc.c ft_strdup.c ft_toupper.c ft_tolower.c \
-       ft_strchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c \
-       ft_strnstr.c ft_atoi.c ft_strrchr.c ft_substr.c \
-       ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
-       ft_strmapi.c ft_striteri.c ft_putchar_fd.c \
-       ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-       ft_lstnew.c ft_lstadd_front.c \
-	   ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c\
 
-OBJS = ${SRCS:.c=.o}
-HEADER = includes/libft.h
+CC = cc
+
+CCFLAGS = -Wall -Wextra -Werror -fPIC
+
+INC_DIR = .
+
+CPPFLAGS = -I$(INC_DIR)
+
+RM = rm -f
+
+ARNAME = ar rcs $(NAME)
+
+RANNAME = ranlib $(NAME)
+
+OBJS_ALL = $(OBJS) $(SUPP_OBJS) $(BONUS_OBJS)
+
+OBJ_BAS = $(OBJS) $(SUPP_OBJS)
+
+SRC_ALL = $(SRC) $(SUPP_SRC) $(BONUS_SRC)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	ar rcs $@ $^
+$(NAME): $(OBJ_BAS)
+	$(ARNAME) $(OBJ_BAS)
+	$(RANNAME)
 
-%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c
+	$(CC) $(CPPFLAGS) $(CCFLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(OBJS)
+	$(RM) $(OBJS_ALL)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
+
+bonus: $(OBJS_ALL)
+	$(ARNAME) $(OBJS_ALL)
+	$(RANNAME)

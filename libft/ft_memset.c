@@ -3,26 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 11:20:11 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 22:01:19 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/03 13:20:30 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/03 13:20:31 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+void	*ft_memset(void *ptr, int c, size_t n)
 {
-	size_t	i;
-	char	*str;
+	unsigned char	*dst;
 
-	i = 0;
-	str = s;
-	while (i < n)
+	dst = ptr;
+	while (n > 0)
 	{
-		str[i] = c;
-		i++;
+		*dst = (unsigned char) c;
+		dst++;
+		n--;
 	}
-	return (s);
+	return (ptr);
 }
+
+/*
+#include <stdio.h>
+#include <string.h>
+
+int main () 
+{
+   char str[6] = "Hello";//works with this
+   //doesn't work when we use char *c = "Hello";
+
+   printf("%s\n",str);
+
+   ft_memset(str, '0', 3);
+   printf("%s\n",str);
+
+   memset(str, 'x', 2);
+   printf("%s\n",str);
+   
+   return(0);
+}*/

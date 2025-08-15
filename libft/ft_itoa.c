@@ -3,63 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 20:50:48 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 20:54:36 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/10 13:23:48 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/10 13:23:50 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h> 
 #include "libft.h"
 
-static char	*ft_char(char *s, unsigned int number, long int len)
+static char	*memory_allocation(int len)
 {
-	while (number > 0)
-	{
-		s[len--] = 48 + (number % 10);
-		number = number / 10;
-	}
-	return (s);
+	char	*tmp;
+
+	tmp = malloc((len + 1) * sizeof(char));
+	if (!tmp)
+		return (NULL);
+	tmp[0] = '0';
+	return (tmp);
 }
 
-static long int	ft_len(int n)
+static int	number_length(long nbr)
 {
-	int	len;
+	int	count;
 
-	len = 0;
-	if (n <= 0)
-		len = 1;
-	while (n != 0)
+	count = 0;
+	if (nbr < 0)
 	{
-		len++;
-		n = n / 10;
+		count++;
+		nbr = -nbr;
 	}
-	return (len);
+	if (nbr == 0)
+		count++;
+	while (nbr != 0)
+	{
+		nbr /= 10;
+		count++;
+	}
+	return (count);
 }
 
 char	*ft_itoa(int n)
 {
-	char				*s;
-	long int			len;
-	unsigned int		number;
-	int					sign;
+	int		len;
+	int		i;
+	char	*result;
+	long	nbr;
 
-	sign = 1;
-	len = ft_len(n);
-	s = (char *)malloc(sizeof(char) * (len + 1));
-	if (!(s))
+	nbr = n;
+	len = number_length(nbr);
+	result = memory_allocation(len);
+	if (!result)
 		return (NULL);
-	s[len--] = '\0';
-	if (n == 0)
-		s[0] = '0';
-	if (n < 0)
+	if (nbr < 0)
+		nbr = -nbr;
+	i = len - 1;
+	while (nbr != 0)
 	{
-		sign *= -1;
-		number = n * -1;
-		s[0] = '-';
+		result[i] = ((nbr % 10) + 48);
+		nbr = nbr / 10;
+		i--;
 	}
-	else
-		number = n;
-	s = ft_char(s, number, len);
-	return (s);
+	if (n < 0)
+		result[0] = '-';
+	result[len] = 0;
+	return (result);
 }
+
+/*
+#include <stdio.h>
+#include <unistd.h>
+
+int	main (void)
+{
+	int n = 214748;
+	printf("numlen = %d\n", int_len(n));
+	printf("result: %s\n", ft_itoa(n));
+	return (0);
+}
+*/

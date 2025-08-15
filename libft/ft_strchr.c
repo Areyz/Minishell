@@ -3,22 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 19:05:05 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 19:23:39 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/05 12:43:19 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/05 12:43:21 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *str, int c)
 {
-	while ((char)c != *s)
+	char			*temp;
+	unsigned char	cc;
+
+	temp = (char *) str;
+	cc = (unsigned char) c;
+	if (!cc)
+		return (temp + ft_strlen(str));
+	while (*temp)
 	{
-		if (!*s)
-			return (0);
-		s++;
+		if (*temp == cc)
+			return (temp);
+		temp++;
 	}
-	return ((char *)s);
+	if (!temp)
+		return (temp);
+	return (NULL);
 }
+
+/*
+#include <stdio.h>
+
+int main()
+{
+	char c = 'a';
+	char* str = "qwertyasd";
+	printf("%s\n", ft_strchr(str, c));
+	return 0;
+}
+*/

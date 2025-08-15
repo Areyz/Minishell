@@ -1,45 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 13:24:33 by kjamrosz          #+#    #+#             */
-/*   Updated: 2024/12/10 13:24:34 by kjamrosz         ###   ########.fr       */
+/*   Created: 2024/12/17 12:16:35 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/17 12:16:36 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	size_t	i;
+	t_list	*last;
 
-	if (!s || !f)
+	if (!new)
 		return ;
-	i = 0;
-	while (s[i])
+	if (!*lst)
 	{
-		f(i, &s[i]);
-		i++;
+		*lst = new;
+		return ;
 	}
+	last = ft_lstlast(*lst);
+	last->next = new;
 }
 
 /*
+#include <stdlib.h>
 #include <stdio.h>
-
-void func(unsigned int i, char *c)
-{
-	printf("%c\n", c[i]);
-}
-
 int main()
 {
-	char *str = "abcdefgh";
-	printf("str = %s\n", str);
-	ft_striteri(str, &func);
-	printf("newstr = %s\n", str);
-	return 0;
+	int v1 = 10, v2 = 20, v3=40;
+	t_list *first = ft_lstnew(&v1);
+    first->next = ft_lstnew(&v2);
+
+	t_list *new = ft_lstnew(&v3);
+
+	ft_lstadd_back(&first, new);
+
+	t_list *temp = first;
+
+	while (temp)
+	{
+		printf("Node content: %d\n", *(int *)(temp->content));
+		temp = temp->next;
+	}	
+
+	return (0);
 }
 */

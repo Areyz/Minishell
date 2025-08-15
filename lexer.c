@@ -13,19 +13,32 @@
 #include "minishell.h"
 
 //basic lexer for tokenising and categorising
-char	lexer(char **argv)
+// char	lexer(char *r_line)
+void	lexer(char *r_line)
 {
 	int			i;
-	t_token		next;
-	t_token		new;
+	//t_token		next;
+	//t_token		new;
 
-	ft_lstadd_back
+	t_enviro	*env;
 
-	i = 1;
-	while (argv[i])
+	char	**tokens;
+	
+	tokens = ft_split(r_line, ' '); //creating list of tokens
+				//for now we only consider single space
+				//remember to free
+	env = env_init(tokens);
+	i = 0;
+	while(tokens[i++])
+		free(tokens[i]);
+	free(tokens);
+
+	i = 0;
+	while(env) //print every node of t_enviro
 	//todo - linked list with next and prev
 	{
-		parsing(argv[i]);
+		printf("env[%d] = %s\n",i, env->content);
+		env = env->next;
 		i++;
 	}
 }

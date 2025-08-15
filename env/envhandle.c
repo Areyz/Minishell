@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	**rebuild_env(t_enviro *enviro)
 {
@@ -50,7 +50,9 @@ t_enviro	*ft_lstnew_env(char *content)
 	return (elem);
 }
 
-t_enviro	*env_init(char *envp[])
+//we create nodes for given list of env variables
+//and link them together	
+t_enviro	*env_init(char **envp)
 {
 	t_enviro	*start;
 	t_enviro	*new_node;
