@@ -3,8 +3,7 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = minishell
 RM = rm -f
 SRC = 	main \
-		lexer \
-		env/envhandle
+		env/env_to_global
 #extortion/do_extortion \
 		env/childpar \
 		env/do_pipe \
@@ -24,7 +23,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -lreadline
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	make bonus -C $(LIBFT_DIR)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
