@@ -6,7 +6,7 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 20:43:20 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/08/15 22:37:10 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/08/16 18:47:27 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	set_signals_interactive(void)
 
 	ignore_sigquit();
 	ft_memset(&act, 0, sizeof(act));
-	act.sa_handler = &signal_reset_promt;
+	act.sa_handler = &signal_reset_prompt;
 	sigaction(SIGINT, &act, NULL);
 }
 

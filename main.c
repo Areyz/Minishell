@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 20:02:55 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/11 17:23:23 by mgolasze         ###   ########.fr       */
+/*   Updated: 2025/08/16 18:50:56 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ void minishell_loop(t_global *global)
 	printf("entered minishell_loop()\n");
 	while (42)
 	{
-		//take care of signals etc
+		set_signals_interactive();
 		global->input = readline(PROMPT);
+		set_signals_noninteractive();
 		break;
 	}
 }
