@@ -18,26 +18,40 @@ bool	global_init(t_global *global, char **envp)
 	//printf("inside > global_init()\n");	//del
 	if(!env_init(global, envp))
 	{
-		printf("env_init() failed");
-		exit(42);
-		//add free()
+		ft_putstr_fd("env_init failed\n", 2);
+		exit(EXIT_FAILURE);
 	}
 
 	//initialization of other elements of our 'global' struct
+	global->input = NULL;
 
 	return (true);
 }
 
 void minishell_loop(t_global *global)
 {
-	printf("entered minishell_loop()\n");
 	while (42)
 	{
-		set_signals_interactive();
+		//set_signals_interactive();
 		global->input = readline(PROMPT);
-		set_signals_noninteractive();
+		//set_signals_noninteractive();
 		break;
 	}
+	//free
+	free_global(global);
+}
+
+void	free_ptr(void **ptr)
+{
+	if (ptr && *ptr)
+		free(*ptr);
+	*ptr = NULL;
+}
+
+void	free_global(t_global *global)
+{
+	if (global && global->input)
+		free_ptr((void **)&global->input);
 }
 
 //Main function - to do - add Sigur loop and commands and states (ctrl - c etc)

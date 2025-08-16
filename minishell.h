@@ -47,11 +47,16 @@ typedef struct s_global
 }	t_global;
 
 /* env_to_global.c */
-bool	save_env_nam_and_val(char *envp, char **env_name, char **env_value);
+void	save_env_nam_and_val(char *envp, char **env_name, char **env_value);
 bool	save_envp_to_list(t_list **list, char *envp);
 bool	env_init(t_global *global, char **envp);
 void	minishell_loop(t_global *global);
 
+/* cleanup.c */
+void	ft_clear_env(void *env_content_node);
+
+/* exit.c */
+void	ft_exit(t_global *global);//, int exit_status);
 
 void		parsing(char *str, t_token parser);
 void		isourcommand(t_token parser);
@@ -68,5 +73,8 @@ void	signal_print_newline (int signo);
 void	set_signals_noninteractive(void);
 void	ignore_sigquit(void);
 
+// temp
+void	free_ptr(void **ptr);
+void	free_global(t_global *global);
 
 #endif

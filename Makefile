@@ -1,8 +1,11 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 NAME = minishell
 RM = rm -f
 SRC = 	main \
+		signals \
+		exit \
+		cleanup \
 		env/env_to_global
 #extortion/do_extortion \
 		env/childpar \
