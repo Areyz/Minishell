@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 18:55:19 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/09 22:50:34 by mgolasze         ###   ########.fr       */
+/*   Updated: 2025/08/15 22:37:08 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,13 @@ void		lexer(char *r_line);
 char		**rebuild_env(t_enviro *enviro);
 t_enviro	*ft_lstnew_env(char *content);
 t_enviro	*env_init(char **envp);
+
+//signals
+void	signal_reset_line(int signo);
+void	set_signals_interactive(void);
+void	signal_print_newline (int signo);
+void	set_signals_noninteractive(void);
+void	ignore_sigquit(void);
+
 
 #endif
