@@ -38,21 +38,20 @@ void minishell_loop(t_global *global)
 		break;
 	}
 	//free
-	free_global(global);
 }
 
-void	free_ptr(void **ptr)
-{
-	if (ptr && *ptr)
-		free(*ptr);
-	*ptr = NULL;
-}
+// void	free_ptr(void **ptr)
+// {
+// 	if (ptr && *ptr)
+// 		free(*ptr);
+// 	*ptr = NULL;
+// }
 
-void	free_global(t_global *global)
-{
-	if (global && global->input)
-		free_ptr((void **)&global->input);
-}
+// void	free_global(t_global *global)
+// {
+// 	if (global && global->input)
+// 		free_ptr((void **)&global->input);
+// }
 
 //Main function - to do - add Sigur loop and commands and states (ctrl - c etc)
 int	main(int argc, char **argv, char **envp)
@@ -62,28 +61,26 @@ int	main(int argc, char **argv, char **envp)
 	//global = NULL;
 	(void) argc;
 	(void) argv;
-	
+
 	if(global_init(&global, envp)) 	//this prepares our 'global' struct
 	{
 		printf("global init OK\n");	//del
 		minishell_loop(&global);
 	}
 
-	//lexer(argv);
+	free((&global)->input);	// zwalnia 1 bajta
+	// również wpisując różny input mamy ciągle tyle samo bajtów w leakach
 
-	// loop - put it in separate function
-	/*
-	char	*r_line;
-	while (42)
-	{
-		// 1) read
-		r_line = readline("minishell >> ");
-		printf("%s\n", r_line); //for tests
-		//lexer(r_line);
+	
 
-		// 2) lexer/parser
-		// 3) execute
-	}
-		*/
+	//free((&global)->enviro);
+	//	dodając to zmieniło się z
+	//	def lost 16 bytes in 1 blocks => 8 bytes in 1 bl
+	//	ind lost 36 bytes in 3 blocks => 28 bytes in 3bl
+
+	//free(global); // to też nic nie zmienia, po przeniesieniu do main()'a
+					// kompilator nawet krzyczy, że tego się nie zwalnia xD
+
+	free_global(&global); //to zwalnia: def 8 in 1, ind 28 in 3
 	return (0);
 }

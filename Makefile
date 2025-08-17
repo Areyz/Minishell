@@ -6,6 +6,7 @@ SRC = 	main \
 		signals \
 		exit \
 		cleanup \
+		cleanup_free \
 		env/env_to_global
 #extortion/do_extortion \
 		env/childpar \
