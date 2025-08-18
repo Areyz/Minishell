@@ -6,7 +6,7 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 20:02:55 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/16 18:50:56 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/08/17 20:39:54 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ void minishell_loop(t_global *global)
 {
 	while (42)
 	{
-		//set_signals_interactive();
+		set_signals_interactive();
 		global->input = readline(PROMPT);
-		//set_signals_noninteractive();
+		set_signals_noninteractive();
+		if (parse_input(global))
+			//preapre function for execution
 		break;
 	}
 	//free
@@ -53,7 +55,6 @@ void minishell_loop(t_global *global)
 // 		free_ptr((void **)&global->input);
 // }
 
-//Main function - to do - add Sigur loop and commands and states (ctrl - c etc)
 int	main(int argc, char **argv, char **envp)
 {
 	t_global	global;
@@ -62,7 +63,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 
-	if(global_init(&global, envp)) 	//this prepares our 'global' struct
+	if (global_init(&global, envp)) 	//this prepares our 'global' struct
 	{
 		printf("global init OK\n");	//del
 		minishell_loop(&global);

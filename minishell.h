@@ -6,7 +6,7 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 18:55:19 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/15 22:37:08 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/08/18 22:02:17 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,17 @@ char		**rebuild_env(t_enviro *enviro);
 t_enviro	*ft_lstnew_env(char *content);
 
 
-//signals
+/*signals */
 void	signal_reset_line(int signo);
 void	set_signals_interactive(void);
 void	signal_print_newline (int signo);
 void	set_signals_noninteractive(void);
 void	ignore_sigquit(void);
+
+/*parse*/
+bool	parse_input(t_global *global);
+int		is_space(int z);
+bool	user_input_is_space(char *str);
 
 // temp
 void	free_ptr(void **ptr);
