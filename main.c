@@ -69,19 +69,7 @@ int	main(int argc, char **argv, char **envp)
 		minishell_loop(&global);
 	}
 
-	free((&global)->input);	// zwalnia 1 bajta
-	// również wpisując różny input mamy ciągle tyle samo bajtów w leakach
-
-	
-
-	//free((&global)->enviro);
-	//	dodając to zmieniło się z
-	//	def lost 16 bytes in 1 blocks => 8 bytes in 1 bl
-	//	ind lost 36 bytes in 3 blocks => 28 bytes in 3bl
-
-	//free(global); // to też nic nie zmienia, po przeniesieniu do main()'a
-					// kompilator nawet krzyczy, że tego się nie zwalnia xD
-
-	free_global(&global); //to zwalnia: def 8 in 1, ind 28 in 3
+	free((&global)->input);
+	free_global(&global);
 	return (0);
 }

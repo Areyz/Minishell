@@ -8,7 +8,8 @@ SRC = 	main \
 		cleanup \
 		cleanup_free \
 		env/env_to_global \
-		commands/env
+		commands/env \
+		commands/pwd
 #		commands/export
 #extortion/do_extortion \
 		env/childpar \

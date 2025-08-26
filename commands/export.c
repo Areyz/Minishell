@@ -48,7 +48,7 @@ static int	export_replace(t_global *global, t_token *token)
 	return (0);
 }
 
-void	export(t_global *global, t_token *token)    //to be fixed after implementing parsing
+void	ft_export(t_global *global, t_token *token)    //to be fixed after implementing parsing
 {
 	t_enviro	*enviro;
 	t_enviro	*lst;
