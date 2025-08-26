@@ -1,40 +1,26 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/06 22:10:13 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/09 22:50:57 by mgolasze         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../minishell.h"
 
-#include "minishell.h"
-
-void	export(t_global *global, t_token *token)
+static char	*get_key(char *str)
 {
-	t_enviro	*enviro;
-	t_enviro	*lst;
-	char		*to_copy;
+	int		i;
+	int		l;
+	char	*key;
 
-	enviro = global->enviro;
-	if (export_replace(global, token))
-		return ;
-	else
+	i = 0;
+	l = 0;
+	while (str[i] != '=' && str[i])
+		i++;
+	key = malloc(i + 1);
+	while (l < i)
 	{
-		lst = malloc(sizeof(t_enviro));
-		if (!lst)
-			return ;
-		while (enviro != NULL && enviro -> next != NULL)
-			enviro = enviro->next;
-		lst->content = ft_strdup(token->history);
-		enviro->next = lst;
-		lst->next = NULL;
+		key[l] = str[l];
+		l++;
 	}
+	key[l] = '\0';
+	return (key);
 }
 
-int	export_replace(t_global *global, t_token *token)
+static int	export_replace(t_global *global, t_token *token)
 {
 	char		*to_replace;
 	char		*to_compare;
@@ -62,22 +48,24 @@ int	export_replace(t_global *global, t_token *token)
 	return (0);
 }
 
-char	*get_key(char *str)
+void	export(t_global *global, t_token *token)    //to be fixed after implementing parsing
 {
-	int		i;
-	int		l;
-	char	*key;
+	t_enviro	*enviro;
+	t_enviro	*lst;
+	char		*to_copy;
 
-	i = 0;
-	l = 0;
-	while (str[i] != '=' && str[i])
-		i++;
-	key = malloc(i + 1);
-	while (l < i)
+	enviro = global->enviro;
+	if (export_replace(global, token))
+		return ;
+	else
 	{
-		key[l] = str[l];
-		l++;
+		lst = malloc(sizeof(t_enviro));
+		if (!lst)
+			return ;
+		while (enviro != NULL && enviro -> next != NULL)
+			enviro = enviro->next;
+		lst->content = ft_strdup(token->history);
+		enviro->next = lst;
+		lst->next = NULL;
 	}
-	key[l] = '\0';
-	return (key);
 }

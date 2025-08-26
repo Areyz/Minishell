@@ -82,4 +82,10 @@ bool	user_input_is_space(char *str);
 void	free_ptr(void **ptr);
 void	free_global(t_global *global);
 
+/* build-in commands */
+void	ft_env(t_global *global);
+void	ft_export(t_global *global, t_token *token);
+int     ft_pwd(void);
+void    ft_exit(t_global *global);
+
 #endif

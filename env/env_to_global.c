@@ -72,7 +72,7 @@ bool	env_init(t_global *global, char **envp)
 			printf("save_envp_to_global() failed");
 			return (false);
 		}
-		break;
+		//break;
 	}
 	global->enviro = list;	//OK
 	return (true);

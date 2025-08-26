@@ -7,7 +7,9 @@ SRC = 	main \
 		exit \
 		cleanup \
 		cleanup_free \
-		env/env_to_global
+		env/env_to_global \
+		commands/env
+#		commands/export
 #extortion/do_extortion \
 		env/childpar \
 		env/do_pipe \
