@@ -7,7 +7,7 @@ SRC = 	main \
 		exit \
 		cleanup \
 		cleanup_free \
-		env/env_to_global \
+		commands/env_to_global \
 		commands/env \
 		commands/pwd
 #		commands/export

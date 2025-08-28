@@ -26,6 +26,13 @@
 
 # define PROMPT "minishell>"
 
+typedef struct s_command
+{
+    char    *name;
+	int		arg_num;
+    char	**arg;
+}   t_command;
+
 typedef struct s_token
 {
 	char			*history;

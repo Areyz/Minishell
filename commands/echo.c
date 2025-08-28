@@ -2,21 +2,22 @@
 
 int	ft_echo(t_command *cmd)
 {
-	int	i;
-	int	newline;
+	int		i;
+	bool	newline;
 
 	i = 1;
-	newline = 1;
-	if (cmd->args[i] && ft_strncmp(cmd->args[i], "-n", 3) == 0)
+	newline = true;
+	// we check if 2nd arg exists, and if it's "-n"
+	if (cmd->arg[i] && !ft_strncmp(cmd->arg[i], "-n", 3))
 	{
-		newline = 0;
+		newline = false;
 		i++;
 	}
-	while (cmd->args[i])
+	while (cmd->arg[i]) //we print further elements
 	{
 		printf("%s", cmd->args[i]);
 		if (cmd->args[i + 1])
-			printf(" ");
+			printf(" "); //single space is correct
 		i++;
 	}
 	if (newline)
