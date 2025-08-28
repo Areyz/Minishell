@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/28 15:12:40 by kjamrosz          #+#    #+#             */
+/*   Updated: 2025/08/28 15:12:43 by kjamrosz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 static void	pwd_update(t_global *global, const char *old_dir)
 {
-	//this makes no sense !
-	char	new_dir[4096];
+	char	*new_dir;	//[4096];
 
+	new_dir = getcwd(NULL, 0);
 	env_update(global, "OLDPWD", old_dir);
-	if (getcwd(new_dir, sizeof(new_dir)) != NULL)
+	if (new_dir) // != NULL
 		env_update(global, "PWD", new_dir);
 	else
 		perror("cd: getcwd error after chdir");
@@ -15,9 +27,12 @@ static void	pwd_update(t_global *global, const char *old_dir)
 int	ft_cd(t_global *global, t_command *cmd) // to be tested
 {
 	char	*path;
-	char	current_dir[4096];	//it's the max size of path in linux
+	// char	cwd[4096];	//it's the max size of path in linux
+	char	*cwd;
 
-	if (!getcwd(current_dir, sizeof(current_dir)))
+	cwd = getcwd(NULL, 0);
+
+	if (!cwd) // == NULL
 	{
 		perror("cd: getcwd error");
 		return (1);
@@ -29,11 +44,11 @@ int	ft_cd(t_global *global, t_command *cmd) // to be tested
 		return (1);
 	}
 	path = cmd->arg[1];
-	if (chdir(path) != 0)
+	if (chdir(path) != 0)  //On success, zero is returned.
 	{
 		perror("cd");
 		return (1);
 	}
-	update_pwd_variables(global, current_dir);
+	pwd_update(global, cwd);
 	return (0);
 }

@@ -22,6 +22,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+# include <limits.h>
 //# include "pipex.h"
 
 # define PROMPT "minishell>"
@@ -51,6 +52,7 @@ typedef struct s_global
 {
 	t_list		*enviro;
 	char		*input;
+	t_command	*command;
 }	t_global;
 
 /* env_to_global.c */
