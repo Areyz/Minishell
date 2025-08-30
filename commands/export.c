@@ -12,74 +12,44 @@
 
 #include "../minishell.h"
 
-static char	*get_key(char *str)
+static int	check_if_env_exists(t_command *cmd, t_list *current)
 {
-	int		i;
-	int		l;
-	char	*key;
+	t_enviro	*env;
+	t_enviro	*new_env;
 
-	i = 0;
-	l = 0;
-	while (str[i] != '=' && str[i])
-		i++;
-	key = malloc(i + 1);
-	while (l < i)
+	save_env_nam_and_val(cmd->arg[1], &new_env->nam_and_val[0],
+				&new_env->nam_and_val[0]);
+	while (current != NULL)
 	{
-		key[l] = str[l];
-		l++;
-	}
-	key[l] = '\0';
-	return (key);	//remember to free()
-}
-
-static int	export_replace(t_global *global, t_token *token)
-{
-	char		*to_replace;
-	char		*to_compare;
-	t_list		*enviro;
-
-	enviro = global->enviro;
-	to_replace = get_key(token->history);
-	while (enviro != NULL)
-	{
-		// to_compare = get_key(enviro->content);
-		// if ((ft_strncmp(to_compare, to_replace, ft_strlen(to_replace)) == 0))
-		to_compare = ((t_enviro *)enviro->content)->nam_and_val[0]; //we take env name
-		if ((ft_strcmp(to_compare, to_replace) == 0))
+		env = ((t_enviro *)current->content);
+		if (ft_strcmp(env->nam_and_val[0], new_env->nam_and_val[0]) == 0)
+		//we compare names, if we already have this env
 		{
-			free(enviro->content);
-			enviro->content = ft_strdup(token->history);
-			if (!enviro->content)
-				//error_exit(global, ENOMEM);
-			//free(to_compare);
-			free(to_replace);
-			return (1);
+			if (env->nam_and_val[1])//if it has value
+				free(env->nam_and_val[1]);
+			env->nam_and_val[1] = new_env->nam_and_val[1];
+			return (0);
 		}
-		//free(to_compare);
-		enviro = enviro->next;
+		current = current->next;
 	}
-	free(to_replace);
-	return (0);
+	return (1);
 }
 
-void	ft_export(t_global *global, t_token *token)	//to be fixed after implementing parsing
+int	ft_export(t_global *global, t_command *cmd)
 {
-	t_list	*enviro;
-	t_list	*lst;
-	char	*to_copy;
+	t_list	*current;
 
-	enviro = global->enviro;
-	if (export_replace(global, token))
-		return ;
+	current = global->enviro;
+	if (!current) // if list of env is empty
+		current = save_envp_to_list(current, cmd->arg[1]);
 	else
 	{
-		lst = malloc(sizeof(t_list));
-		if (!lst)
-			return ;
-		while (enviro != NULL && enviro -> next != NULL)
-			enviro = enviro->next;
-		lst->content = ft_strdup(token->history);
-		enviro->next = lst;
-		lst->next = NULL;
+		if (check_if_env_exists(cmd, current) == 0)
+			return (0);
+		while (current->next != NULL)
+			current = current->next;
+		if (cmd->arg[1] && ft_strchr(cmd->arg[1], '=')) //if there is a command that containd '='
+			current->next = save_envp_to_list(current, cmd->arg[1]);
 	}
+	return (0);
 }
