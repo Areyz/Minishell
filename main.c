@@ -20,9 +20,7 @@ void minishell_loop(t_global *global)
 {
 	while (42)
 	{
-		set_signals_interactive();
 		global->input = readline(PROMPT);
-		set_signals_noninteractive();
 		if (parse_input(global))
 			//preapre function for execution
 		break;
@@ -43,6 +41,10 @@ void minishell_loop(t_global *global)
 // 		free_ptr((void **)&global->input);
 // }
 
+/*
+init_signalz() - This function sets up signal handling
+rl_catch_signals = 0; - setup for handle signals by sigaction
+*/
 int	main(int argc, char **argv, char **envp)
 {
 	t_global	global;
@@ -54,6 +56,8 @@ int	main(int argc, char **argv, char **envp)
 	if (global_init(&global, envp)) 	//this prepares our 'global' struct
 	{
 		printf("global init OK\n");	//del
+		init_signalz();
+		rl_catch_signals = 0;
 		minishell_loop(&global);
 	}
 

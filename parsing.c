@@ -6,7 +6,7 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 18:55:22 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/18 22:05:05 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/08/23 18:11:43 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void isourcommand(t_token *parser)
 */
 bool	parse_input(t_global *global)
 {
-	if (global->input == NULL) 
+	if (global->input == NULL)
 	{
 		exit(0);
 		//return(false);   Without this return becaouse it does not make sense

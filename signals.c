@@ -6,21 +6,39 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 20:43:20 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/08/16 21:32:08 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/08/30 17:33:11 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-Function handle usage Ctr + C during writing comand mode. 
-Function cleaning the line and showing new empty promt.
-rl_on_new_line - delete what user wrote
-rl_redisplay - create new promt
+A signal handler (automatically called when the process 
+receives a signal like SIGINT -> Ctrl+C). 
+The argument sig is the signal number (e.g. 2 for SIGINT).
 */
-void	signal_reset_line(int signo)
+void	handle_sigint_heredoc(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+}
+/*
+This is a handler for SIGQUIT (Ctrl+\).
+Effect: pressing Ctrl+\ does nothing in the shell.
+*/
+
+void	sigquit_handler(int signo)
 {
 	(void)signo;
+}
+
+/*
+After pressinh Ctrl+C at the prompt, unfinished command is cleared 
+and we see a fresh prompt on the next line.
+*/
+void	sigint_handler(int sig)
+{
+	(void)sig;
 	rl_replace_line("", 0);
 	write(1, "\n", 1);
 	rl_on_new_line();
@@ -28,49 +46,19 @@ void	signal_reset_line(int signo)
 }
 
 /*
-Function set minishell behavior, when he is waiting for entering the command
-ignore sigquit - ignore Ctrl + \
+Declares a sigaction structure for configuring signal behavior.
 */
-void	set_signals_interactive(void)
+void	init_signalz(void)
 {
-	struct sigaction	act;
+	struct sigaction	sa;
 
-	ignore_sigquit();
-	ft_memset(&act, 0, sizeof(act));
-	act.sa_handler = &signal_reset_line;
-	sigaction(SIGINT, &act, NULL);
-}
-
-/*
-Function will be using when minishell not waiting for the command, but when he executing command
-Function display new line. It is not reset prompt.
-*/
-void	signal_print_newline (int signo)
-{
-	(void)signo;
-	write(1, "\n", 1);
-	rl_on_new_line();
-}
-
-/*
-Function will execute when minishell will start for example comands cat, ls and he should not react for Ctrl+C
-*/
-void	set_signals_noninteractive(void)
-{
-	struct sigaction	act;
-
-	ft_memset(&act, 0, sizeof(act));
-	sigaction(SIGQUIT, &act, NULL);
-	sigaction(SIGQUIT, &act, NULL);
-}
-/*
-It set that minishell will ignore Ctrl+\ (SIGQUIT)
-SIG_IGN is special function to ignore signal
-*/
-void	ignore_sigquit(void)
-{
-	struct sigaction	act;
-	
-	act.sa_handler = SIG_IGN;
-	sigaction(SIGQUIT, &act, NULL);
+	sa.sa_handler = SIG_IGN;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGQUIT, &sa, NULL);
+	sigaction(SIGTSTP, &sa, NULL);
+	sa.sa_handler = sigint_handler;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &sa, NULL);
 }
