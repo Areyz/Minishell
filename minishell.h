@@ -6,7 +6,7 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 18:55:19 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/18 22:02:17 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:38:24 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ typedef struct s_token
 	char			type;
 	struct s_token 	*next;
 	struct s_token 	*prev;
+	char			*str:
+	char			**array;
+	int				maxw;
+	int				maxc;
+	int				word_i;
+	int				letter_i;
+	enum e_chartype	mode;
+	enum e_chartype	modemem;
+	char			quote;
 }	t_token;
 
 typedef struct s_enviro
@@ -53,6 +62,7 @@ typedef struct s_global
 	t_list		*enviro;
 	char		*input;
 	t_command	*command;
+	char		*token_array[];
 }	t_global;
 
 /* env_to_global.c */
@@ -76,16 +86,16 @@ t_enviro	*ft_lstnew_env(char *content);
 
 
 /*signals */
-void	signal_reset_line(int signo);
-void	set_signals_interactive(void);
-void	signal_print_newline (int signo);
-void	set_signals_noninteractive(void);
-void	ignore_sigquit(void);
+void	handle_sigint_heredoc(int sig);
+void	sigquit_handler(int signo);
+void	sigint_handler(int sig);
+void	init_signalz(void);
 
 /*parse*/
-bool	parse_input(t_global *global);
-int		is_space(int z);
-bool	user_input_is_space(char *str);
+static int	process_and_execute(t_global *global);
+
+/*validate input*/
+static int	get_and_validate_input(t_global *global);
 
 // temp
 void	free_ptr(void **ptr);

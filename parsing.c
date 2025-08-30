@@ -6,7 +6,7 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 18:55:22 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/23 18:11:43 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/08/30 18:35:08 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,4 @@ void isourcommand(t_token *parser)
 		else
 			execute_other_command();
 	}
-}
-
-/* 
-1.check if user input is NULL (user used Ctrl+D), if yes minishel exit
-2.check if string entered by the user is "\0", if yes, minishell does not have anything to parse
-3.check if user input is only a space
-*/
-bool	parse_input(t_global *global)
-{
-	if (global->input == NULL)
-	{
-		exit(0);
-		//return(false);   Without this return becaouse it does not make sense
-	}
-	else if (ft_strncmp(global->input, "\0", 1) == 0)
-		return (false);
-	else if (user_input_is_space(global->input))
-		return(true);
 }
