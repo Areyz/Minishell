@@ -15,15 +15,36 @@ bool	global_init(t_global *global, char **envp)
 
 	return (true);
 }
+/*
+get_and_validate_input - displays the prompt (via readline), 
+reads the user’s command, 
+checks if the input is valid (not empty, not only spaces, etc.) 
+and returns a status code telling what to do next.
+If the status is 0, it means the user wants 
+to exit (for example, typing exit or hitting Ctrl+D).
+If the status is 2, it means skip this iteration and 
+go back to prompting the user again.
+(This could happen if the input was empty, 
+contained only spaces, or had a syntax error.)
+If process_and_execute reports 2, the loop just skips 
+to the next prompt instead of continuing execution.
+*/
 
 void minishell_loop(t_global *global)
 {
+	int	loop_status;
+
 	while (42)
 	{
-		global->input = readline(PROMPT);
-		if (parse_input(global))
-			//preapre function for execution
-		break;
+		loop_status = get_and_validate_input(global);
+		if (loop_status == 0)
+			break;
+		if (loop_status == 2)
+			continue;
+		loop_status = process_and_execute(global);
+		if (loop_status == 2)
+			continue;
+		//break;
 	}
 	//free
 }
