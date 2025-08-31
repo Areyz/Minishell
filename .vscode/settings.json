@@ -1,7 +1,8 @@
 {
 	"files.associations": {
 		"minishell.h": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"type_traits": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

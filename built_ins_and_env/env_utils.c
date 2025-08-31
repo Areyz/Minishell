@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_init.c                                         :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:13:28 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/28 15:13:29 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/08/31 17:48:17 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,32 @@ void	env_update(t_global *global, const char *name, const char *value)
 		}
 		current = current->next;
 	}
+}
+
+char	**env_array_from_enviro(t_global *global)
+{
+	int			i;
+	int			list_size;
+	char		**result_arr;
+	t_list		*node;
+	t_enviro	*env;
+
+	i = 0;
+	list_size = 0;
+	list_size = ft_lstsize(global->enviro);
+	printf("list_size = %d\n", list_size); //DEL
+	node = (t_enviro *)global->enviro;
+	result_arr = ft_calloc(list_size + 1, sizeof(char *));
+	while (i < list_size)
+	{
+		
+		result_arr[i] = ft_calloc(ft_strlen(node->nam_and_val[0])
+				+ ft_strlen(node->nam_and_val[1]) + 2, sizeof(char)); //allocate mem
+		result_arr[i] = ft_strjoin(ft_strjoin(node->nam_and_val[0], "="),
+						node->nam_and_val[0]);
+		//if it doesn't work, use ft_strlcat()
+		node = node->next;
+		i++;
+	}
+	return (result_arr);
 }
