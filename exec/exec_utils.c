@@ -6,11 +6,11 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 16:16:00 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/31 18:13:28 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:50:53 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	handle_redirections(t_global *global, int i, int pipe_n)
 {
@@ -30,7 +30,7 @@ void	handle_redirections(t_global *global, int i, int pipe_n)
 		redir_control(global, i);
 }
 
-char	*find_path_sub(t_shell *shell, int i)
+char	*find_sub_path(t_global *global, int i)
 {
 	char	*target;
 	char	*folder;
@@ -41,9 +41,9 @@ char	*find_path_sub(t_shell *shell, int i)
 	offset = 0;
 	while (1)
 	{
-		folder = next_folder(shell, &offset);
+		folder = next_folder(global, &offset);
 		target = multicat((char *[]){folder, "/",
-				shell->command[i].args[0], 0});
+				global->command[i].arg[0], 0});
 		if (folder[0] == 0 || (access(target, F_OK) == 0))
 			break ;
 		safefree(target);
@@ -53,23 +53,23 @@ char	*find_path_sub(t_shell *shell, int i)
 	return (target);
 }
 
-char	*find_path(t_shell *shell, int i)
+char	*find_path(t_global *global, int i)
 {
 	char	*target;
 	char	*folder;
 
 	folder = NULL;
-	if (ft_strncmp(shell->command[i].args[0], "/", 1) == 0)
-		target = ft_strdup(shell->command[i].args[0]);
-	else if (ft_strncmp(shell->command[i].args[0], "./", 2) == 0)
+	if (ft_strncmp(global->command[i].arg[0], "/", 1) == 0)
+		target = ft_strdup(global->command[i].args[0]);
+	else if (ft_strncmp(global->command[i].arg[0], "./", 2) == 0)
 	{
 		folder = ft_calloc(1024, 1);
 		getcwd(folder, 1024);
 		target = multicat((char *[]){folder,
-				&shell->command[i].args[0][1], NULL});
+				&global->command[i].arg[0][1], NULL});
 	}
 	else
-		target = find_path_sub(shell, i);
+		target = find_sub_path(global, i);
 	safefree(folder);
 	return (target);
 }

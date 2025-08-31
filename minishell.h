@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/31 18:22:06 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:45:46 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_global
 void	minishell_loop(t_global *global);
 
 /*env_helpers.c*/
-char *var_to_value(char *var, t_enviro *env_list, unsigned int limit);
+char 	*var_to_value(char *var, t_enviro *env_list, unsigned int limit);
 
 /* free & */
 void	ft_clear_env(void *env_content_node);
@@ -142,5 +142,9 @@ int		check_initial_pipe(t_global *global);
 /* exec */
 void	launch_command(t_global *global);
 void	redir_control(t_global *global, int i);
+void	handle_redirections(t_global *global, int i, int pipe_n);
+char	*find_path(t_global *global, int i);
+char	*find_sub_path(t_global *global, int i);
+char	*multicat(char	**input);
 
 #endif

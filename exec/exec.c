@@ -6,11 +6,11 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 16:16:07 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/31 18:13:28 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:43:27 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	close_pipes(t_shell *shell, int pipe_n)
 {
