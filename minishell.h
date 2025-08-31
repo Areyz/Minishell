@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/31 15:56:49 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/08/31 17:38:02 by mgalecki         ###   ########.fr       */
+/*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
+/*   Updated: 2025/08/31 18:13:12 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,8 @@ int		process_and_execute(t_global *global);
 int		get_and_validate_input(t_global *global);
 
 /* pipes */
-
+int		create_pipes(t_global *global, int pipe_n);
+void	close_pipes(t_shell *shell, int pipe_n);
 
 /* build-in commands and env_utils */
 void	ft_env(t_global *global);
@@ -134,8 +135,11 @@ bool	env_init(t_global *global, char **envp);
 void	env_update(t_global *global, const char *name, const char *value);
 void	ft_quit(t_shell *shell, int exit_code);
 int		ft_builtins(t_global *global, int cmd_n);
+char	**env_array_from_enviro(t_global *global);
+int		validate_pipe_syntax(t_global *global);
 
 /* exec */
 void	launch_command(t_global *global);
+void	redir_control(t_global *global, int i);
 
 #endif

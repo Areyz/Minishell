@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 16:16:07 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/31 17:34:55 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:13:28 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	child_process(t_global *global, int i, int pipe_n)
 	close_pipes(global, pipe_n);
 	if (global->command[i].arg[0] == NULL)
 		exit(0);
-	ft_builtins(global, i);		//done
-	envtemp = env_array_from_enviro(global);
+	ft_builtins(global, i);
+	envtemp = env_array_from_enviro(global); //done
 	//envtemp muste be char**
 	target = find_path(global, i);
 	if (global->command[i].arg[0] != NULL)
