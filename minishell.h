@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/31 12:33:12 by kjamrosz         ###   ########.fr       */
+/*   Created: 2025/08/31 15:56:49 by mgalecki          #+#    #+#             */
+/*   Updated: 2025/08/31 15:56:52 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_global
 	char		*input;
 	t_command	*command;
 	char		**token_array;
+	int			last_exit_code;
 }	t_global;
 
 /* env_to_global.c */
