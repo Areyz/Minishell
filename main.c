@@ -42,23 +42,9 @@ void minishell_loop(t_global *global)
 		loop_status = process_and_execute(global);
 		if (loop_status == 2)
 			continue;
-		//break;
 	}
 	//free
 }
-
-// void	free_ptr(void **ptr)
-// {
-// 	if (ptr && *ptr)
-// 		free(*ptr);
-// 	*ptr = NULL;
-// }
-
-// void	free_global(t_global *global)
-// {
-// 	if (global && global->input)
-// 		free_ptr((void **)&global->input);
-// }
 
 /*
 init_signalz() - This function sets up signal handling
@@ -74,7 +60,6 @@ int	main(int argc, char **argv, char **envp)
 
 	if (global_init(&global, envp)) 	//this prepares our 'global' struct
 	{
-		printf("global init OK\n");	//del
 		init_signalz();
 		rl_catch_signals = 0;
 		minishell_loop(&global);

@@ -2,7 +2,7 @@
 
 int	check_initial_pipe(t_global *global)
 {
-	if (global->token_arr[0] && ft_strncmp(global->token_arr[0], "|", 1) == 0)
+	if (global->token_array[0] && ft_strncmp(global->token_array[0], "|", 1) == 0)
 	{
 		printf("minishell: syntax error near unexpected token '|'\n");
 		return (1);
@@ -17,17 +17,17 @@ int	validate_pipe_syntax(t_global *global)
 	i = 0;
 	if (check_initial_pipe(global))
 		return (1);
-	while (global->token_arr[i])
+	while (global->token_array[i])
 	{
-		if (ft_strncmp(global->token_arr[i], "|", 1) == 0)
+		if (ft_strncmp(global->token_array[i], "|", 1) == 0)
 		{
-			if (global->token_arr[i + 1] == NULL)
+			if (global->token_array[i + 1] == NULL)
 			{
 				printf("minishell: syntax error near unexpected token '|'\n");
 				return (1);
 			}
-			if (global->token_arr[i + 1]
-				&& ft_strncmp(global->token_arr[i + 1], "|", 1) == 0)
+			if (global->token_array[i + 1]
+				&& ft_strncmp(global->token_array[i + 1], "|", 1) == 0)
 			{
 				printf("minishell: syntax error near unexpected token '|'\n");
 				return (1);

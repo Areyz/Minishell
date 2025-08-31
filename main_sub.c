@@ -29,21 +29,21 @@ int	process_and_execute(t_global *global)
 	{
 		global->last_exit_code = 2;
 		safefree(global->input);
-		free_string_array(global->token_arr);
+		free_string_array(global->token_array);
 		return (2);
 	}
 	lexer(global);
-	if (global->command_nbr > 0 && global->command[0].args
-		&& global->command[0].args[0] && global->command_nbr < 2130)
+	if (global->command_nbr > 0 && global->command[0].arg
+		&& global->command[0].arg[0] && global->command_nbr < 2130)
 	{
 		if (global->command_nbr == 1)
 		{
-			if (builtins(global, 0) == -1)
-				launch_cmd(global);
+			if (ft_builtins(global, 0) == -1)
+				launch_command(global);
 		}
 		else
-			launch_cmd(global);
+			launch_command(global);
 	}
-	free_everything(global);
+	free_all(global);
 	return (1);
 }
