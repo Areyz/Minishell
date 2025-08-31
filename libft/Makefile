@@ -16,7 +16,7 @@ NAME = libft.a
 
 CC = cc
 
-CCFLAGS = -Wall -Wextra -Werror -fPIC
+CCFLAGS = -Wall -Wextra -Werror
 
 INC_DIR = .
 
