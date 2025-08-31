@@ -3,18 +3,16 @@
 /*Initializing global struct*/
 bool	global_init(t_global *global, char **envp)
 {
-	//printf("inside > global_init()\n");	//del
 	if(!env_init(global, envp))
 	{
 		ft_putstr_fd("env_init failed\n", 2);
 		exit(EXIT_FAILURE);
 	}
-
 	//initialization of other elements of our 'global' struct
 	global->input = NULL;
-
 	return (true);
 }
+
 /*
 get_and_validate_input - displays the prompt (via readline), 
 reads the user’s command, 

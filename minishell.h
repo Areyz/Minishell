@@ -25,7 +25,7 @@
 # include <limits.h>
 //# include "pipex.h"
 
-# define PROMPT "minishell>"
+# define PROMPT "\033[22;33m$minishell> \033[0m"
 
 enum e_chartype
 {
@@ -40,17 +40,17 @@ enum e_chartype
 
 typedef struct s_command
 {
-    char    *name;
+    char	*name;
 	int		arg_num;
     char	**arg;
 }   t_command;
 
 typedef struct s_token
 {
-	char			*history;
-	char			type;
-	struct s_token 	*next;
-	struct s_token 	*prev;
+	// char			*history;
+	// char			type;
+	// struct s_token 	*next;
+	// struct s_token 	*prev;
 	char			*str;
 	char			**array;
 	int				maxw;
@@ -65,7 +65,6 @@ typedef struct s_token
 typedef struct s_enviro
 {
 	char			**nam_and_val;
-	//struct s_enviro	*next;
 }	t_enviro;
 
 typedef struct s_global
@@ -83,22 +82,22 @@ void	minishell_loop(t_global *global);
 void	ft_clear_env(void *env_content_node);
 
 
-void		parsing(char *str, t_token parser);
-void		isourcommand(t_token parser);
-void		error_exit(t_global *parsing);
-void		lexer(char *r_line);
-char		**rebuild_env(t_enviro *enviro);
-t_enviro	*ft_lstnew_env(char *content);
+// void		parsing(char *str, t_token parser);
+// void		isourcommand(t_token parser);
+// void		error_exit(t_global *parsing);
+// void		lexer(char *r_line);
+// char		**rebuild_env(t_enviro *enviro);
+// t_enviro	*ft_lstnew_env(char *content);
 
 /* tokenizer */
 char	**tokenize(t_global *s);
-void	init_tokenz(t_token *t, char *source);
+void	init_token(t_token *t, char *source);
 
 /*signals */
 void	handle_sigint_heredoc(int sig);
 void	sigquit_handler(int signo);
 void	sigint_handler(int sig);
-void	init_signalz(void);
+void	init_signal(void);
 
 /*parse*/
 int	process_and_execute(t_global *global);
@@ -112,7 +111,7 @@ void	free_global(t_global *global);
 
 /* build-in commands and env_utils */
 void	ft_env(t_global *global);
-int	ft_export(t_global *global, t_command *cmd);
+int		ft_export(t_global *global, t_command *cmd);
 int		ft_pwd(void);
 void	ft_exit(t_global *global);
 int		ft_unset(t_global *global, t_command *cmd);

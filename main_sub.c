@@ -7,7 +7,7 @@ status code so the main loop knows what to do next.
 */
 int	get_and_validate_input(t_global *global)
 {
-	global->input = readline("\033[22;33m$minishell> \033[0m");
+	global->input = readline(PROMPT);
 	if (!global->input)
 	{
 		printf("\nExiting...\n");
@@ -25,5 +25,25 @@ int	get_and_validate_input(t_global *global)
 int	process_and_execute(t_global *global)
 {
 	global->token_array = tokenize(global);
-	return (0);
+	if (validate_pipe_syntax(global) == 1)
+	{
+		global->last_exit_code = 2;
+		safefree(global->input);
+		free_string_array(global->token_arr);
+		return (2);
+	}
+	lexer(global);
+	if (global->command_nbr > 0 && global->command[0].args
+		&& global->command[0].args[0] && global->command_nbr < 2130)
+	{
+		if (global->command_nbr == 1)
+		{
+			if (builtins(global, 0) == -1)
+				launch_cmd(global);
+		}
+		else
+			launch_cmd(global);
+	}
+	free_everything(global);
+	return (1);
 }

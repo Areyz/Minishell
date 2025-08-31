@@ -48,7 +48,7 @@ void	sigint_handler(int sig)
 /*
 Declares a sigaction structure for configuring signal behavior.
 */
-void	init_signalz(void)
+void	init_signal(void)
 {
 	struct sigaction	sa;
 

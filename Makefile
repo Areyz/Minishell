@@ -8,14 +8,15 @@ SRC = 	main \
 		cleanup \
 		cleanup_free \
 		tokenizer \
-		commands/cd \
-		commands/echo \
-		commands/env_utils \
-		commands/env \
-		commands/exit \
-		commands/export \
-		commands/pwd \
-		commands/unset \
+		command_utils \
+		built_ins_and_env/cd \
+		built_ins_and_env/echo \
+		built_ins_and_env/env_utils \
+		built_ins_and_env/env \
+		built_ins_and_env/exit \
+		built_ins_and_env/export \
+		built_ins_and_env/pwd \
+		built_ins_and_env/unset \
 #extortion/do_extortion \
 		env/childpar \
 		env/do_pipe \
