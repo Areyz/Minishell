@@ -6,7 +6,7 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:55:35 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/08/31 15:55:37 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/08/31 17:29:24 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,39 @@ void	init_token(t_token *t, char *source)
 	t->array = ft_calloc(t->maxw + 1, sizeof(char *));
 }
 
+void	quote_check(t_token *t)
+{
+	if (t->mode != QUOTE)
+	{
+		t->quote = *t->str;
+		t->str++;
+		t->mode = QUOTE;
+		next_word(t);
+	}
+	else if (t->mode == QUOTE && (*t->str == t->quote))
+	{
+		t->mode = NONE;
+		t->quote = 0;
+		t->str++;
+	}
+}
+
+void	char_check(t_token *t)
+{
+	t->modemem = t->mode;
+	if (*t->str == ' ')
+		t->mode = SPACE2;
+	else if(*t->str == '<' || *t->str == '>')
+		t->mode = REDIR;
+	else if(*t->str == '|')
+		t->mode = PIPE;
+	else
+		t->mode = WORD;
+	if (t->modemem != t->mode)
+		if (t->mode != SPACE2)
+			next_word(t);
+}
+
 void	process_char(t_token *t, t_global *s)
 {
 	(void)t;	//temporarly foe tests - to be deleted
@@ -54,8 +87,21 @@ void	process_char(t_token *t, t_global *s)
 			question_mark(t, s);
 		else
 			dolarskan(t, s);
-		return;
+		return ;
 	}
+	if (*t->str == 39 || *t->str == 34)
+	{
+		quote_check(t);
+		return ;
+	}
+	if (t->quote == 0)
+		char_check(t);
+	if (t->mode == QUOTE || (*t->str != ' ' && *t->str '\t'))
+	{
+		put_letter(t);
+		t->letter_i++;
+	}
+	t->str++;
 }
 
 /*

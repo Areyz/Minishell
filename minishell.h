@@ -6,7 +6,7 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:56:49 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/08/31 15:56:52 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/08/31 17:38:02 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ typedef struct s_global
 /* env_to_global.c */
 void	minishell_loop(t_global *global);
 
+/*env_helpers.c*/
+char *var_to_value(char *var, t_enviro *env_list, unsigned int limit);
+
 /* free & */
 void	ft_clear_env(void *env_content_node);
 void	free_string_array(char **arg);
@@ -88,9 +91,19 @@ void	ft_clear_env(void *env_node);
 void	free_commands(t_global *global);
 void	free_all(t_global *global);
 
-/* tokenizer */
+/* tokenizer.c */
 char	**tokenize(t_global *s);
+void	process_char(t_token *t, t_global *s);
+void	char_check(t_token *t);
+void	quote_check(t_token *t);
 void	init_token(t_token *t, char *source);
+char	**str_array_realloc(char **old, size_t add_slots);
+
+/* tokenizer2.c */
+void	dolarskan(t_token *t, t_global *s);
+void	question_mark(t_token *t, t_global *s);
+void	next_word(t_token *t);
+void	put_letter(t_token *t);
 
 /*signals */
 void	handle_sigint_heredoc(int sig);
