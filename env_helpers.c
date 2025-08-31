@@ -6,8 +6,13 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:54:22 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/08/31 15:54:25 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/08/31 16:16:12 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char *var_to_value(char *var, t_enviro *env_list, unsigned int limit)
+{
+	//TO DO
+}

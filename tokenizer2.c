@@ -6,7 +6,7 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:55:07 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/08/31 15:55:10 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/08/31 17:29:43 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,14 @@ char	**str_array_realloc(char **old, size_t add_slots)
 		j++;
 	}
 	new[j] = NULL;
-	fre(old);
+	free(old);
 	return (new);
+}
+
+void	put_letter(t_token *t)
+{
+	if (t->letter_i < t->maxc - 1)
+		t->array[t->word_i][t->letter_i] = *t->str;
 }
 
 void	next_word(t_token *t)
@@ -93,5 +99,11 @@ void	dolarskan(t_token *t, t_global *s)
 		end++;
 	n = end - start;
 	t->str += n;
-	if (*var_to)
+	if (*var_to_value(start, s->enviro, n) == 0 && t->mode == DOLLAR)
+	{
+		t->word_i -= 1;
+		t->letter_i = 0;
+		return ;
+	}
+	ft_strlcat(&t->array[t->word_i][t->letter_i], var_to_value(start, s->enviro, n));
 }
