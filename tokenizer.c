@@ -10,7 +10,7 @@ t->maxw = 8 - sets the initial maximum number of words
 t->maxc = 1024 - sets the maximum number of characters per token
 t->word_i = -1 - Index of the current word/token. Initialized to -1 
 so that the first call to next_word(t) moves it to 0.
-t->letter_i = 0 - Index of the current character inside the current word.
+t->letter_i = 0 - index of the current character inside the current word.
 t->mode = NONE - parsing mode: determines what kind of token we’re in (WORD, SPACE, PIPE, REDIR, QUOTE).
 t->modemem = NONE - saves the previous mode so the tokenizer can detect when a new token starts (e.g. switching from WORD to PIPE).
 t->quote = 0 - tracks whether we are inside quotes:
@@ -36,6 +36,15 @@ void	process_char(t_token *t, t_global *s)
 {
 	(void)t;	//temporarly foe tests - to be deleted
 	(void)s;	//temporarly foe tests - to be deleted
+	if (*t->str == '$' && t->quote != 39 && t->letter_i < t->maxc)
+	{
+		t->str++;
+		if (*t->str == '?')
+			question_mark(t, s);
+		else
+			dolarskan(t, s);
+		return;
+	}
 }
 
 /*
