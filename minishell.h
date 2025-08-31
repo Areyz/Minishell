@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/31 18:13:12 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:22:06 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void	ft_quit(t_shell *shell, int exit_code);
 int		ft_builtins(t_global *global, int cmd_n);
 char	**env_array_from_enviro(t_global *global);
 int		validate_pipe_syntax(t_global *global);
+int		check_initial_pipe(t_global *global);
 
 /* exec */
 void	launch_command(t_global *global);
