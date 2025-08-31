@@ -43,7 +43,7 @@ int	ft_unset(t_global *global, t_command *cmd) // to be tested
 				global->enviro = current->next;
 			else
 				previous->next = current->next;
-			free_elem(current); //we have to delete this element
+			free_elem((t_enviro *)current); //we have to delete this element
 			return (0);
 		}
 		previous = current;

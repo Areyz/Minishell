@@ -19,7 +19,7 @@ t->array = ft_calloc(t->maxw + 1, sizeof(char *)) - Allocates memory for the tok
 Initially enough space for maxw = 8 tokens + 1 NULL terminator.
 */
 
-void	initokenz(t_token *t, char *source)
+void	init_token(t_token *t, char *source)
 {
 	t->str = source;
 	t->maxw = 8;
@@ -27,13 +27,15 @@ void	initokenz(t_token *t, char *source)
 	t->word_i = -1;
 	t->letter_i = 0;
 	t->mode = NONE;
-	t->modemem = NONE:
+	t->modemem = NONE;
 	t->quote = 0; 
 	t->array = ft_calloc(t->maxw + 1, sizeof(char *));
 }
 
 void	process_char(t_token *t, t_global *s)
 {
+	(void)t;	//temporarly foe tests - to be deleted
+	(void)s;	//temporarly foe tests - to be deleted
 }
 
 /*
@@ -44,7 +46,7 @@ char **tokenize(t_global *s)
 {
 	t_token	t;
 
-	initoken(&t, s->input);
+	init_token(&t, s->input);
 	while (*t.str)
 	{
 		process_char(&t, s);

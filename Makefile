@@ -3,14 +3,19 @@ CFLAGS = -Wall -Wextra -Werror -g
 NAME = minishell
 RM = rm -f
 SRC = 	main \
+		main_sub \
 		signals \
-		exit \
 		cleanup \
 		cleanup_free \
-		commands/env_to_global \
+		tokenizer \
+		commands/cd \
+		commands/echo \
+		commands/env_utils \
 		commands/env \
-		commands/pwd
-#		commands/export
+		commands/exit \
+		commands/export \
+		commands/pwd \
+		commands/unset \
 #extortion/do_extortion \
 		env/childpar \
 		env/do_pipe \

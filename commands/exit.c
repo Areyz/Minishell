@@ -15,6 +15,7 @@
 void    ft_exit(t_global *global)
 {
 	//free everything
+	(void) global; //temp - del
 
 	exit(0);
 }

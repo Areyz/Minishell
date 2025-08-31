@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 18:55:19 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/08/30 20:38:24 by mgalecki         ###   ########.fr       */
+/*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
+/*   Updated: 2025/08/31 12:33:12 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@
 
 # define PROMPT "minishell>"
 
+enum e_chartype
+{
+	NONE,
+	WORD,
+	SPACE2,
+	REDIR,
+	QUOTE,
+	DOLLAR,
+	PIPE
+};
+
 typedef struct s_command
 {
     char    *name;
@@ -40,7 +51,7 @@ typedef struct s_token
 	char			type;
 	struct s_token 	*next;
 	struct s_token 	*prev;
-	char			*str:
+	char			*str;
 	char			**array;
 	int				maxw;
 	int				maxc;
@@ -62,20 +73,15 @@ typedef struct s_global
 	t_list		*enviro;
 	char		*input;
 	t_command	*command;
-	char		*token_array[];
+	char		**token_array;
 }	t_global;
 
 /* env_to_global.c */
-void	save_env_nam_and_val(char *envp, char **env_name, char **env_value);
-bool	save_envp_to_list(t_list **list, char *envp);
-bool	env_init(t_global *global, char **envp);
 void	minishell_loop(t_global *global);
 
 /* cleanup.c */
 void	ft_clear_env(void *env_content_node);
 
-/* exit.c */
-void	ft_exit(t_global *global);//, int exit_status);
 
 void		parsing(char *str, t_token parser);
 void		isourcommand(t_token parser);
@@ -84,6 +90,9 @@ void		lexer(char *r_line);
 char		**rebuild_env(t_enviro *enviro);
 t_enviro	*ft_lstnew_env(char *content);
 
+/* tokenizer */
+char	**tokenize(t_global *s);
+void	init_tokenz(t_token *t, char *source);
 
 /*signals */
 void	handle_sigint_heredoc(int sig);
@@ -92,19 +101,26 @@ void	sigint_handler(int sig);
 void	init_signalz(void);
 
 /*parse*/
-static int	process_and_execute(t_global *global);
+int	process_and_execute(t_global *global);
 
 /*validate input*/
-static int	get_and_validate_input(t_global *global);
+int	get_and_validate_input(t_global *global);
 
 // temp
 void	free_ptr(void **ptr);
 void	free_global(t_global *global);
 
-/* build-in commands */
+/* build-in commands and env_utils */
 void	ft_env(t_global *global);
-void	ft_export(t_global *global, t_token *token);
-int     ft_pwd(void);
-void    ft_exit(t_global *global);
+int	ft_export(t_global *global, t_command *cmd);
+int		ft_pwd(void);
+void	ft_exit(t_global *global);
+int		ft_unset(t_global *global, t_command *cmd);
+int		ft_echo(t_command *cmd);
+int		ft_cd(t_global *global, t_command *cmd);
+void	save_env_nam_and_val(char *envp, char **env_name, char **env_value);
+bool	save_envp_to_list(t_list **list, char *envp);
+bool	env_init(t_global *global, char **envp);
+void	env_update(t_global *global, const char *name, const char *value);
 
 #endif
