@@ -25,8 +25,10 @@ SRC = 	main \
 		exec/exec_utils \
 		exec/redir_utils \
 		lexer/commands \
-		lexer/ \
-		lexer/
+		lexer/cmd_helpers1 \
+		lexer/cmd_helpers2 \
+		lexer/redir_helpers \
+		lexer/redirections
 
 SRCS = $(addsuffix .c, $(SRC))
 OBJS = $(SRCS:.c=.o)

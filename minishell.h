@@ -6,7 +6,7 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 19:46:04 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/01 20:31:37 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,15 @@ void	lexer (t_global	*global);
 void	*safe_malloc(size_t size);
 void	alloc_commands(t_global *global);
 void	init_commands(t_global *global);
-void init_iterators(int *tkn_i, int *arg_i, int *cmd_i);
+void 	init_iterators(int *tkn_i, int *arg_i, int *cmd_i);
 void	hanlde_pipe_token(t_global *global, int *cmd_i, int *arg_i, int *tkn_i);
-
+void	fill_args_helper(t_global *global, int i, int k, int *h);
+void	fill_args(t_global *global);
+int		is_redirect(char *arg);
+void	init_redirs(t_global *global, int cmd_i, int redirs);
+void	redir_type(t_redir *redir_struct, char *arg);
+void	redir_filename(t_command *cmd, int redir_i, int arg_i);
+void	redir_parse(t_global *global);
 
 /*validate input*/
 int		get_and_validate_input(t_global *global);
