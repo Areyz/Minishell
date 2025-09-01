@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 19:12:17 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:15:47 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,6 @@ typedef struct s_global
 /* env_to_global.c */
 void	minishell_loop(t_global *global);
 
-/*env_helpers.c*/
-char 	*var_to_value(char *var, t_enviro *env_list, unsigned int limit);
-
 /* free & */
 void	ft_clear_env(void *env_content_node);
 void	free_string_array(char **arg);
@@ -154,5 +151,6 @@ char	*find_path(t_global *global, int i);
 char	*find_sub_path(t_global *global, int i);
 char	*multicat(char	**input);
 char	*next_folder(t_global *global, int *offset);
+char	*find_env_val(char *var, t_list *env_list, unsigned int limit);
 
 #endif
