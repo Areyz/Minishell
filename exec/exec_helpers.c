@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 18:43:02 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 17:57:41 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:15:36 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ char	*next_folder(t_global *global, int *offset)
 	char			*result;
 
 	len = 0;
-	str = (find_env_val("PATH", global->env_list, 4));
+	str = (find_env_val("PATH", global->enviro, 4));
 	cap = ft_strlen(str);
 	result = ft_calloc(cap + 1, sizeof(char));
 	if (*offset + len >= cap)
 		return (result);
 	while (str[*offset + len] != ':' && *offset + len < cap)
 		len++;
-	ft_strncpy(result, &str[*offset], len);
+	ft_strlcpy(result, &str[*offset], len);
 	*offset = *offset + len + 1;
 	return (result);
 }

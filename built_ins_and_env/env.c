@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:13:44 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/28 15:13:45 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:10:43 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_env(t_global *global) //tested to print env - OK
+int	ft_env(t_global *global) //tested to print env - OK
 {
 	t_list      *env;
     t_enviro    *data;
@@ -25,4 +25,5 @@ void	ft_env(t_global *global) //tested to print env - OK
 		printf("%s=%s\n", data->nam_and_val[0], data->nam_and_val[1]);
 		env = env->next;
 	}
+	return (0);
 }

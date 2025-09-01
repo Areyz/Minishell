@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:13:28 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/31 17:48:17 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:21:54 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,16 +120,15 @@ char	**env_array_from_enviro(t_global *global)
 	i = 0;
 	list_size = 0;
 	list_size = ft_lstsize(global->enviro);
-	printf("list_size = %d\n", list_size); //DEL
-	node = (t_enviro *)global->enviro;
+	node = global->enviro;
 	result_arr = ft_calloc(list_size + 1, sizeof(char *));
 	while (i < list_size)
 	{
-		
-		result_arr[i] = ft_calloc(ft_strlen(node->nam_and_val[0])
-				+ ft_strlen(node->nam_and_val[1]) + 2, sizeof(char)); //allocate mem
-		result_arr[i] = ft_strjoin(ft_strjoin(node->nam_and_val[0], "="),
-						node->nam_and_val[0]);
+		env = (t_enviro *)node->content;
+		result_arr[i] = ft_calloc(ft_strlen(env->nam_and_val[0])
+				+ ft_strlen(env->nam_and_val[1]) + 2, sizeof(char)); //allocate mem
+		result_arr[i] = ft_strjoin(ft_strjoin(env->nam_and_val[0], "="),
+						env->nam_and_val[0]);
 		//if it doesn't work, use ft_strlcat()
 		node = node->next;
 		i++;

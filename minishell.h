@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 20:50:36 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:20:12 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # include <readline/history.h>
 # include <stdbool.h>
 # include <limits.h>
-//# include "pipex.h"
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <fcntl.h>
 
 # define PROMPT "\033[22;33m$minishell> \033[0m"
 
@@ -92,6 +94,8 @@ typedef struct s_global
 	int			comand_nbr;
 	char		**token_array;
 	int			last_exit_code;
+	int			pidz[2000];
+	int			pipe_fd[2000][2];
 }	t_global;
 
 /* env_to_global.c */
@@ -136,7 +140,7 @@ void	*safe_malloc(size_t size);
 void	alloc_commands(t_global *global);
 void	init_commands(t_global *global);
 void 	init_iterators(int *tkn_i, int *arg_i, int *cmd_i);
-void	hanlde_pipe_token(t_global *global, int *cmd_i, int *arg_i, int *tkn_i);
+void	handle_pipe_token(t_global *global, int *cmd_i, int *arg_i, int *tkn_i);
 void	fill_args_helper(t_global *global, int i, int k, int *h);
 void	fill_args(t_global *global);
 int		is_redirect(char *arg);
@@ -155,7 +159,7 @@ int		create_pipes(t_global *global, int pipe_n);
 void	close_pipes(t_global *global, int pipe_n);
 
 /* build-in commands and env_utils */
-void	ft_env(t_global *global);
+int	ft_env(t_global *global);
 int		ft_export(t_global *global, t_command *cmd);
 int		ft_pwd(void);
 void	ft_exit(t_global *global);

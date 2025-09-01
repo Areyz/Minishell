@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 16:16:00 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 19:39:39 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 22:00:51 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handle_redirections(t_global *global, int i, int pipe_n)
 	{
 		if (i == 0)
 			dup2(global->pipe_fd[i][1], STDOUT_FILENO);
-		else if (i == global->command_nbr - 1)
+		else if (i == global->comand_nbr - 1)
 			dup2(global->pipe_fd[i - 1][0], STDIN_FILENO);
 		else
 		{

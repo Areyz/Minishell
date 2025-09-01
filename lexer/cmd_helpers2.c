@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_helpers2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 19:36:13 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/09/01 20:07:26 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:18:04 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	fill_args_helper(t_global *global, int i, int k, int *h)
 {

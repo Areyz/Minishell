@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redir_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:19:56 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/09/01 20:27:48 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:17:58 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	redir_type(t_redir *redir_struct, char *arg)
 {

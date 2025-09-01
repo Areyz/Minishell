@@ -6,11 +6,11 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 19:45:59 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 19:57:42 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:07:11 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 int	check_initial_pipe(t_global *global)
 {

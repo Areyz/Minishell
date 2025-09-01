@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_helpers1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 19:24:03 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/09/01 20:48:53 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:20:57 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	del_redir(t_global *global, int arg_i, int cmd_i)
 {
@@ -87,7 +87,7 @@ void	init_commands(t_global *global)
 		global->command[i].arg = NULL;
 		global->command[i].arg_num = 0;
 		global->command[i].redir_count = 0;
-		global->command[i].redir_count = NULL;
+		global->command[i].redir = NULL;
 		i++;
 	}
 }

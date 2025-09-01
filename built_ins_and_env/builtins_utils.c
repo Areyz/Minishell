@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:55:17 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/31 15:55:38 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:11:10 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_quit(t_global *global, int exit_code)
 {
 	free_all(global);
-	ft_clear_env_list(global->env);
+	ft_clear_env_list(global->enviro);
 	exit(exit_code);
 }
 
@@ -41,7 +41,7 @@ int	ft_builtins(t_global *global, int cmd_n)
 	else
 		return (-1);
 	global->last_exit_code = exit_code;
-	if (global->command_nbr > 1)
+	if (global->comand_nbr > 1)
 		ft_quit(global, exit_code);
 	return (exit_code);
 }

@@ -6,11 +6,11 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 16:47:52 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/31 18:44:03 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:17:40 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static int	heredoc_loop(int fd, char *terminator)
 {
@@ -71,20 +71,20 @@ static void	in_redirs(t_global *global, int i, int j)
 
 	if (global->command[i].redir[j].type == IN)
 	{
-		helper_fd = open(global->command[i].redir[j].filename, O_RDONLY);
+		helper_fd = open(global->command[i].redir[j].file_name, O_RDONLY);
 		if (helper_fd == -1)
 		{
 			ft_putstr_fd("minishell: ", 2);
-			perror(global->command[i].redir[j].filename);
+			perror(global->command[i].redir[j].file_name);
 			exit(1);
 		}
-		global->pipe_fd[i][0] = open(global->command[i].redir[j].filename, 
+		global->pipe_fd[i][0] = open(global->command[i].redir[j].file_name, 
 				O_RDONLY);
 		dup2(global -> pipe_fd[i][0], STDIN_FILENO);
 	}
 	else if (global->command[i].redir[j].type == HEREDOC)
 	{
-		global->pipe_fd[i][0] = heredoc(global->command[i].redir[j].filename);
+		global->pipe_fd[i][0] = heredoc(global->command[i].redir[j].file_name);
 		dup2(global->pipe_fd[i][0], STDIN_FILENO);
 	}
 }
@@ -93,13 +93,13 @@ static void	out_redirs(t_global *global, int i, int j)
 {
 	if (global->command[i].redir[j].type == OUT)
 	{
-		global->pipe_fd[i][1] = open(global->command[i].redir[j].filename,
+		global->pipe_fd[i][1] = open(global->command[i].redir[j].file_name,
 				O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		dup2(global->pipe_fd[i][1], STDOUT_FILENO);
 	}
 	else if (global->command[i].redir[j].type == APPEND)
 	{
-		global->pipe_fd[i][1] = open(global->command[i].redir[j].filename,
+		global->pipe_fd[i][1] = open(global->command[i].redir[j].file_name,
 				O_WRONLY | O_CREAT | O_APPEND, 0644);
 		dup2(global->pipe_fd[i][1], STDOUT_FILENO);
 	}
