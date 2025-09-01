@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 17:33:17 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:12:17 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_global
 	t_list		*enviro;
 	char		*input;
 	t_command	*command;
+	int			comand_nbr;
 	char		**token_array;
 	int			last_exit_code;
 }	t_global;
@@ -113,6 +114,12 @@ void	init_signal(void);
 
 /*parse*/
 int		process_and_execute(t_global *global);
+
+/*lexer*/
+void	lexer (t_global	*global);
+void	*safe_malloc(size_t size);
+void	alloc_commands(t_global *global);
+
 
 /*validate input*/
 int		get_and_validate_input(t_global *global);

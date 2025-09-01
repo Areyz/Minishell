@@ -6,11 +6,18 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:35:58 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/08/31 17:36:01 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/01 18:58:48 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	lexer (t_global	*global)
+{
+	alloc_commands(global);
+	redir_parse(global);
+	cut_args(global);	
+}
 
 /*
 get_and_validate_input() - showing the shell prompt,reading user 

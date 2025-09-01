@@ -6,11 +6,24 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:57:05 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/08/31 15:57:10 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:09:02 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	*safe_malloc(size_t size)
+{
+	void	*ptr;
+
+	ptr = malloc(size);
+	if (ptr == NULL)
+	{
+		ft_putchar_fd("Error: Memory allocation failed\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	return (ptr);
+}
 
 /*Initializing global struct*/
 bool	global_init(t_global *global, char **envp)
