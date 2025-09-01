@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:55:35 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/09/01 19:45:05 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 20:55:41 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	process_char(t_token *t, t_global *s)
 	}
 	if (t->quote == 0)
 		char_check(t);
-	if (t->mode == QUOTE || (*t->str != ' ' && *t->str '\t'))
+	if (t->mode == QUOTE || (*t->str != ' ' && *t->str != '\t'))
 	{
 		put_letter(t);
 		t->letter_i++;

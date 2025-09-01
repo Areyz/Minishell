@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 19:46:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 19:46:11 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 20:54:02 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	ft_clear_env_list(t_list *node)
 {
-	t_list		*node;
-	t_enviro	*env;
+	t_enviro	*content;
 	while (node)
 	{
 		content = (t_enviro *)node->content;
@@ -93,19 +92,19 @@ void	free_commands(t_global *global)
 	if (!global->command)
 		return ;
 	i = 0;
-	while (i < global->command_nbr)
+	while (i < global->comand_nbr)
 	{
 		free_string_array(global->command[i].arg);
 		if (global->command[i].redir)
 		{
-			free(global->command[i].redir->filename);
+			free(global->command[i].redir->file_name);
 			free(global->command[i].redir);
 		}
 		i++;
 	}
 	free(global->command);
 	global->command = NULL;
-	global->command_nbr = 0;
+	global->comand_nbr = 0;
 }
 
 void	safefree(void *ptr)
@@ -126,9 +125,9 @@ void	free_all(t_global *global)
 		free_commands(global);
 		global->command = NULL;
 	}
-	if (global->token_arr)
+	if (global->token_array)
 	{
-		free_string_array(global->token_arr);
-		global->token_arr = NULL;
+		free_string_array(global->token_array);
+		global->token_array = NULL;
 	}
 }
