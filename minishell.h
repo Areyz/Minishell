@@ -6,7 +6,7 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 20:31:37 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/01 20:49:09 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,8 @@ void	init_redirs(t_global *global, int cmd_i, int redirs);
 void	redir_type(t_redir *redir_struct, char *arg);
 void	redir_filename(t_command *cmd, int redir_i, int arg_i);
 void	redir_parse(t_global *global);
+void	cut_args(t_global *global);
+void	del_redir(t_global *global, int arg_i, int cmd_i);
 
 /*validate input*/
 int		get_and_validate_input(t_global *global);
