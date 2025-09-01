@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:55:07 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/08/31 17:29:43 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:18:20 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,11 @@ void	dolarskan(t_token *t, t_global *s)
 		end++;
 	n = end - start;
 	t->str += n;
-	if (*var_to_value(start, s->enviro, n) == 0 && t->mode == DOLLAR)
+	if (*find_env_val(start, s->enviro, n) == 0 && t->mode == DOLLAR)
 	{
 		t->word_i -= 1;
 		t->letter_i = 0;
 		return ;
 	}
-	ft_strlcat(&t->array[t->word_i][t->letter_i], var_to_value(start, s->enviro, n));
+	ft_strlcat(&t->array[t->word_i][t->letter_i], find_env_val(start, s->enviro, n));
 }

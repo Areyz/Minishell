@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 16:16:00 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/31 18:50:53 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:39:39 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*find_path(t_global *global, int i)
 
 	folder = NULL;
 	if (ft_strncmp(global->command[i].arg[0], "/", 1) == 0)
-		target = ft_strdup(global->command[i].args[0]);
+		target = ft_strdup(global->command[i].arg[0]);
 	else if (ft_strncmp(global->command[i].arg[0], "./", 2) == 0)
 	{
 		folder = ft_calloc(1024, 1);

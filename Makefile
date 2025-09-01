@@ -8,7 +8,10 @@ SRC = 	main \
 		cleanup \
 		cleanup_free \
 		tokenizer \
+		tokenizer2 \
 		command_utils \
+		pipes \
+		built_ins_and_env/builtins_utils \
 		built_ins_and_env/cd \
 		built_ins_and_env/echo \
 		built_ins_and_env/env_utils \
@@ -17,14 +20,13 @@ SRC = 	main \
 		built_ins_and_env/export \
 		built_ins_and_env/pwd \
 		built_ins_and_env/unset \
-#extortion/do_extortion \
-		env/childpar \
-		env/do_pipe \
-		env/envhandle \
-		env/findpath \
-		commands/export \
-		commands/export&env
-#utils \ parsing
+		exec/exec \
+		exec/exec_helpers \
+		exec/exec_utils \
+		exec/redir_utils \
+		lexer/commands \
+		lexer/ \
+		lexer/
 
 SRCS = $(addsuffix .c, $(SRC))
 OBJS = $(SRCS:.c=.o)

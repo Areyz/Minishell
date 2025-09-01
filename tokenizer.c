@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:55:35 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/08/31 17:29:24 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:45:05 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	char_check(t_token *t)
 
 void	process_char(t_token *t, t_global *s)
 {
-	(void)t;	//temporarly foe tests - to be deleted
-	(void)s;	//temporarly foe tests - to be deleted
+	// (void)t;	//temporarly foe tests - to be deleted
+	// (void)s;	//temporarly foe tests - to be deleted
 	if (*t->str == '$' && t->quote != 39 && t->letter_i < t->maxc)
 	{
 		t->str++;
