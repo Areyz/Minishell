@@ -6,7 +6,7 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 19:00:38 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/09/01 19:51:32 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:59:40 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	alloc_commands(t_global *global)
 	global->comand_nbr = pipes + 1;
 	init_commands(global);
 	alloc_args(global);
+	fill_args(global);
 }
 
 void	hanlde_pipe_token(t_global *global, int *cmd_i, int *arg_i, int *tkn_i)
