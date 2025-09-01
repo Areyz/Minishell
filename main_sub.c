@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:35:58 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/09/01 20:42:41 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 20:51:40 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	process_and_execute(t_global *global)
 	}
 	lexer(global);
 	if (global->comand_nbr > 0 && global->command[0].arg
-		&& global->command[0].arg[0] && global->command_nbr < 2130)
+		&& global->command[0].arg[0] && global->comand_nbr < 2130)
 	{
 		if (global->comand_nbr == 1)
 		{
