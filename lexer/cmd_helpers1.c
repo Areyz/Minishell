@@ -1,0 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_helpers1.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 19:24:03 by mgalecki          #+#    #+#             */
+/*   Updated: 2025/09/01 19:32:30 by mgalecki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+void	init_commands(t_global *global)
+{
+	int	i;
+
+	i = 0;
+	while (i < global->comand_nbr)
+	{
+		global->command[i].name = NULL;
+		global->command[i].arg = NULL;
+		global->command[i].arg_num = 0;
+		global->command[i].redir_count = 0;
+		global->command[i].redir_count = NULL;
+		i++;
+	}
+}

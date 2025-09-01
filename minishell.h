@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 19:15:47 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:46:04 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,28 @@ enum e_chartype
 	PIPE
 };
 
+typedef enum e_redir_type
+{
+	IN,
+	OUT,
+	APPEND,
+	HEREDOC,
+	INVALID
+}	t_redir_type;
+
+typedef struct s_redir
+{
+	t_redir_type	type;
+	char			*file_name;
+}	t_redir;
+
 typedef struct s_command
 {
     char	*name;
 	int		arg_num;
     char	**arg;
+	int		redir_count;
+	t_redir	*redir;
 }   t_command;
 
 typedef struct s_token
@@ -116,6 +133,9 @@ int		process_and_execute(t_global *global);
 void	lexer (t_global	*global);
 void	*safe_malloc(size_t size);
 void	alloc_commands(t_global *global);
+void	init_commands(t_global *global);
+void init_iterators(int *tkn_i, int *arg_i, int *cmd_i);
+void	hanlde_pipe_token(t_global *global, int *cmd_i, int *arg_i, int *tkn_i);
 
 
 /*validate input*/
