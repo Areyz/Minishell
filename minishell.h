@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 20:31:37 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/01 20:41:41 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	ft_clear_env_list(t_list *node);
 void	ft_clear_env(void *env_node);
 void	free_commands(t_global *global);
 void	free_all(t_global *global);
+void	free_global(t_global *global);
 
 /* tokenizer.c */
 char	**tokenize(t_global *s);
@@ -149,7 +150,7 @@ int		get_and_validate_input(t_global *global);
 
 /* pipes */
 int		create_pipes(t_global *global, int pipe_n);
-void	close_pipes(t_shell *shell, int pipe_n);
+void	close_pipes(t_global *global, int pipe_n);
 
 /* build-in commands and env_utils */
 void	ft_env(t_global *global);
@@ -163,7 +164,7 @@ void	save_env_nam_and_val(char *envp, char **env_name, char **env_value);
 bool	save_envp_to_list(t_list **list, char *envp);
 bool	env_init(t_global *global, char **envp);
 void	env_update(t_global *global, const char *name, const char *value);
-void	ft_quit(t_shell *shell, int exit_code);
+void	ft_quit(t_global *global, int exit_code);
 int		ft_builtins(t_global *global, int cmd_n);
 char	**env_array_from_enviro(t_global *global);
 int		validate_pipe_syntax(t_global *global);

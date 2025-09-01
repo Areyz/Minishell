@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_sub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:35:58 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/09/01 18:58:48 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/01 20:42:41 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	process_and_execute(t_global *global)
 		return (2);
 	}
 	lexer(global);
-	if (global->command_nbr > 0 && global->command[0].arg
+	if (global->comand_nbr > 0 && global->command[0].arg
 		&& global->command[0].arg[0] && global->command_nbr < 2130)
 	{
-		if (global->command_nbr == 1)
+		if (global->comand_nbr == 1)
 		{
 			if (ft_builtins(global, 0) == -1)
 				launch_command(global);

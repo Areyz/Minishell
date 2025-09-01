@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:57:05 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/09/01 19:09:02 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/01 20:41:08 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*safe_malloc(size_t size)
 	ptr = malloc(size);
 	if (ptr == NULL)
 	{
-		ft_putchar_fd("Error: Memory allocation failed\n", 2);
+		ft_putstr_fd("Error: Memory allocation failed\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	return (ptr);
@@ -85,7 +85,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (global_init(&global, envp)) 	//this prepares our 'global' struct
 	{
-		init_signalz();
+		init_signal();
 		rl_catch_signals = 0;
 		minishell_loop(&global);
 	}
