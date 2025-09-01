@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/31 18:45:46 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:33:17 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,6 @@ void	handle_redirections(t_global *global, int i, int pipe_n);
 char	*find_path(t_global *global, int i);
 char	*find_sub_path(t_global *global, int i);
 char	*multicat(char	**input);
+char	*next_folder(t_global *global, int *offset);
 
 #endif

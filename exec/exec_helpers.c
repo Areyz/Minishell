@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 18:43:02 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/31 18:47:03 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:57:41 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,23 @@ char	*multicat(char	**input)
 	return (result);
 }
 
+char	*find_env_val(char *var, t_list *env_list, unsigned int limit)
+{
+	t_list		*current;
+	t_enviro	*env;
+
+	current = env_list;
+	while (current->next != NULL)
+	{
+		env = (t_enviro *)current->content;
+		if (ft_strncmp(var, env->nam_and_val[0], ft_strlen(env->nam_and_val[0])) == 0
+			&& ft_strncmp(var, env->nam_and_val[0], limit) == 0)
+			return (env->nam_and_val[1]);
+		current = current->next;
+	}
+	return ("");
+}
+
 char	*next_folder(t_global *global, int *offset)
 {
 	unsigned int	len;
@@ -45,15 +62,13 @@ char	*next_folder(t_global *global, int *offset)
 	char			*result;
 
 	len = 0;
-	str = (var_to_value("PATH", global->env_list, 4));
+	str = (find_env_val("PATH", global->env_list, 4));
 	cap = ft_strlen(str);
 	result = ft_calloc(cap + 1, sizeof(char));
 	if (*offset + len >= cap)
 		return (result);
 	while (str[*offset + len] != ':' && *offset + len < cap)
-	{
 		len++;
-	}
 	ft_strncpy(result, &str[*offset], len);
 	*offset = *offset + len + 1;
 	return (result);

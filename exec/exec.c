@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 16:16:07 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/31 18:43:27 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:10:20 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ void	child_process(t_global *global, int i, int pipe_n)
 	if (global->command[i].arg[0] == NULL)
 		exit(0);
 	ft_builtins(global, i);
-	envtemp = env_array_from_enviro(global); //done
-	//envtemp muste be char**
+	envtemp = env_array_from_enviro(global);
 	target = find_path(global, i);
 	if (global->command[i].arg[0] != NULL)
 		execve(target, global->command[i].arg, envtemp);
@@ -48,6 +47,28 @@ void	child_process(t_global *global, int i, int pipe_n)
 	free_all(global);
 	ft_clear_env(global->env);
 	exit(127);
+}
+
+static void	wait_for_children(t_global *global)
+{
+	int	i;
+	int	status;
+	int	cmd_n;
+
+	i = 0;
+	cmd_n = global->command_nbr;
+	while (i < cmd_n)
+	{
+		waitpid(global->pidz[i], &status, 0);
+		if (i == cmd_n - 1)
+		{
+			if (WIFEXITED(status))
+				global->last_exit_code = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+				global->last_exit_code = 128 + WTERMSIG(status);
+		}
+		i++;
+	}
 }
 
 void	launch_command(t_global *global)
