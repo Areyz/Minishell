@@ -38,9 +38,9 @@ void	child_process(t_global *global, int i, int pipe_n)
 		exit(0);
 	ft_builtins(global, i);
 	envtemp = env_array_from_enviro(global);
-	printf("PATH=%s",getenv("PATH"));	//DEL
+	// printf("PATH=%s",getenv("PATH"));	//DEL
 	target = find_path(global, i);
-	printf("\ntarget=%s", target);	//DEL
+	// printf("\ntarget=%s", target);	//DEL
 	if (global->command[i].arg[0] != NULL)
 		execve(target, global->command[i].arg, envtemp);
 	perror("minishell: command not found");
