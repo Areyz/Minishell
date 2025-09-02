@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	lexer (t_global	*global)
+void	lexer(t_global	*global)
 {
 	alloc_commands(global);
 	redir_parse(global);
