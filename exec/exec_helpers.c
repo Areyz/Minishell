@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 18:43:02 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/02 19:02:04 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:19:59 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ char	*find_env_val(char *var, t_list *env_list, unsigned int limit)
 	while (current->next != NULL)
 	{
 		env = (t_enviro *)current->content;
-		if (ft_strncmp(var, env->nam_and_val[0], ft_strlen(env->nam_and_val[0])) == 0
+		if (ft_strncmp(var, env->nam_and_val[0],
+				ft_strlen(env->nam_and_val[0])) == 0
 			&& ft_strncmp(var, env->nam_and_val[0], limit) == 0)
 			return (env->nam_and_val[1]);
 		current = current->next;
@@ -71,7 +72,7 @@ char	*next_folder(t_global *global, int *offset)
 	{
 		len++;
 	}
-		ft_strncpy(result, &str[*offset], len);
+	ft_strncpy(result, &str[*offset], len);
 	*offset = *offset + len + 1;
 	return (result);
 }

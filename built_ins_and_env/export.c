@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:14:12 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/28 15:14:15 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:16:23 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ static int	check_if_env_exists(t_command *cmd, t_list *current)
 	if (!new_env)
 		printf("error - malloc");
 	save_env_nam_and_val(cmd->arg[1], &new_env->nam_and_val[0],
-				&new_env->nam_and_val[0]);
+		&new_env->nam_and_val[0]);
 	while (current != NULL)
 	{
 		env = ((t_enviro *)current->content);
-		if ((ft_strncmp(env->nam_and_val[0], new_env->nam_and_val[0], 
-			ft_strlen(new_env->nam_and_val[0])) == 0))
-		//we compare names, if we already have this env
+		if ((ft_strncmp(env->nam_and_val[0], new_env->nam_and_val[0],
+					ft_strlen(new_env->nam_and_val[0])) == 0))
 		{
-			if (env->nam_and_val[1])//if it has value
+			if (env->nam_and_val[1])
 				free(env->nam_and_val[1]);
 			env->nam_and_val[1] = new_env->nam_and_val[1];
 			return (0);
@@ -44,9 +43,9 @@ int	ft_export(t_global *global, t_command *cmd)
 	t_list	*current;
 
 	current = global->enviro;
-	if (!current) // if list of env is empty
+	if (!current)
 	{
-		if(!save_envp_to_list(&current, cmd->arg[1]))
+		if (!save_envp_to_list(&current, cmd->arg[1]))
 			printf("error\n");
 	}
 	else
@@ -55,7 +54,7 @@ int	ft_export(t_global *global, t_command *cmd)
 			return (0);
 		while (current->next != NULL)
 			current = current->next;
-		if (cmd->arg[1] && ft_strchr(cmd->arg[1], '=')) //if there is a command that containd '='
+		if (cmd->arg[1] && ft_strchr(cmd->arg[1], '='))
 			save_envp_to_list(&current->next, cmd->arg[1]);
 	}
 	return (0);

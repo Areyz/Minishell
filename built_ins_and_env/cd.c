@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:12:40 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/28 15:12:43 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:11:09 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,23 @@
 
 static void	pwd_update(t_global *global, const char *old_dir)
 {
-	char	*new_dir;	//[4096];
+	char	*new_dir;
 
 	new_dir = getcwd(NULL, 0);
 	env_update(global, "OLDPWD", old_dir);
-	if (new_dir) // != NULL
+	if (new_dir)
 		env_update(global, "PWD", new_dir);
 	else
 		perror("cd: getcwd error after chdir");
 }
 
-int	ft_cd(t_global *global, t_command *cmd) // to be tested
+int	ft_cd(t_global *global, t_command *cmd)
 {
 	char	*path;
-	// char	cwd[4096];	//it's the max size of path in linux
 	char	*cwd;
 
 	cwd = getcwd(NULL, 0);
-
-	if (!cwd) // == NULL
+	if (!cwd)
 	{
 		perror("cd: getcwd error");
 		return (1);
@@ -40,11 +38,10 @@ int	ft_cd(t_global *global, t_command *cmd) // to be tested
 	if (!cmd->arg[1])
 	{
 		write(2, "cd: path required\n", 18);
-		// 2 == stderr
 		return (1);
 	}
 	path = cmd->arg[1];
-	if (chdir(path) != 0)  //On success, zero is returned.
+	if (chdir(path) != 0)
 	{
 		perror("cd");
 		return (1);

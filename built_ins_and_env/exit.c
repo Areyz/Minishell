@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:13:53 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/28 15:13:54 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:14:55 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    ft_exit(t_global *global)
+void	ft_exit(t_global *global)
 {
-	//free everything
-	(void) global; //temp - del
-
+	(void) global;
 	exit(0);
 }

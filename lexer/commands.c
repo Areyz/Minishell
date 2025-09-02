@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 19:00:38 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/09/01 21:19:58 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:23:00 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ void	alloc_args(t_global *global)
 		if (global->token_array[tkn_i + 1] == NULL)
 		{
 			arg_i++;
-			global->command[cmd_i].arg = safe_malloc(sizeof(char *) * (arg_i + 1));
+			global->command[cmd_i].arg = safe_malloc(sizeof(char *)
+					* (arg_i + 1));
 			global->command[cmd_i].arg_num = arg_i;
-			break;
+			break ;
 		}
 		tkn_i++;
 		arg_i++;
@@ -41,8 +42,8 @@ void	alloc_args(t_global *global)
 void	alloc_commands(t_global *global)
 {
 	int	i;
-	int pipes;
-	
+	int	pipes;
+
 	i = 0;
 	pipes = 0;
 	while (global->token_array[i])

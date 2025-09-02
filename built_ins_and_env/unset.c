@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:14:37 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/08/28 15:14:38 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:17:25 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	free_elem(t_enviro *elem) // to be checked
+static void	free_elem(t_enviro *elem)
 {
 	if (elem)
 	{
@@ -20,10 +20,10 @@ static void	free_elem(t_enviro *elem) // to be checked
 		free(elem->nam_and_val[1]);
 		free(elem->nam_and_val);
 		free(elem);
-	} //not to many free()?
+	}
 }
 
-int	ft_unset(t_global *global, t_command *cmd) // to be tested
+int	ft_unset(t_global *global, t_command *cmd)
 {
 	t_list		*current;
 	t_list		*previous;
@@ -33,17 +33,17 @@ int	ft_unset(t_global *global, t_command *cmd) // to be tested
 		return (0);
 	current = global->enviro;
 	previous = NULL;
-	while (current != NULL) //we go thru list of env
+	while (current != NULL)
 	{
 		env = (t_enviro *)current->content;
 		if (ft_strncmp(env->nam_and_val[0], cmd->arg[1],
 				ft_strlen(env->nam_and_val[0]) + 1) == 0)
 		{
-			if (!previous) // then we move forward
+			if (!previous)
 				global->enviro = current->next;
 			else
 				previous->next = current->next;
-			free_elem((t_enviro *)current); //we have to delete this element
+			free_elem((t_enviro *)current);
 			return (0);
 		}
 		previous = current;

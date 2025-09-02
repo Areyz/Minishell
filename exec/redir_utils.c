@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 16:47:52 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 21:17:40 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:18:35 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	in_redirs(t_global *global, int i, int j)
 			perror(global->command[i].redir[j].file_name);
 			exit(1);
 		}
-		global->pipe_fd[i][0] = open(global->command[i].redir[j].file_name, 
+		global->pipe_fd[i][0] = open(global->command[i].redir[j].file_name,
 				O_RDONLY);
 		dup2(global -> pipe_fd[i][0], STDIN_FILENO);
 	}

@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:13:28 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/02 13:35:42 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:13:57 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,48 +22,44 @@ void	save_env_nam_and_val(char *envp, char **env_name, char **env_value)
 
 	env_full_length = ft_strlen(envp);
 	sep_ptr = NULL;
-	// strchr will return ptr to '\0' on the end of a string
-	// if the character won't be found
 	sep_ptr = ft_strchr(envp, '=');
 	if (sep_ptr)
 	{
 		env_val_length = ft_strlen(sep_ptr + 1);
 		env_name_length = env_full_length - env_val_length - 1;
-
 		*env_name = ft_substr(envp, 0, env_name_length);
 		*env_value = ft_substr(envp, env_name_length + 1, env_val_length);
 	}
-	else //in case if some env[i] will not contain '=' for some reason
+	else
 		*env_name = ft_strdup(envp);
 }
 
 /*Saving envp[i] to t_enviro struct: [env_name, env_value]*/
 bool	save_envp_to_list(t_list **list, char *envp)
 {
-	//printf("\ninside > save_envp_to_list()\n");	//del
 	t_enviro	*content;
 
-	content = ft_calloc(sizeof(t_enviro), 1);//allocate mem for [name,val]
+	content = ft_calloc(sizeof(t_enviro), 1);
 	if (!content)
 	{
 		ft_lstclear(list, ft_clear_env);
 		return (false);
 	}
-	content->nam_and_val = ft_calloc(sizeof(char *), 2); //alloc for two strings
+	content->nam_and_val = ft_calloc(sizeof(char *), 2);
 	if (!content->nam_and_val)
 	{
 		ft_lstclear(list, ft_clear_env);
 		return (false);
 	}
-	save_env_nam_and_val(envp, &content->nam_and_val[0], &content->nam_and_val[1]);
+	save_env_nam_and_val(envp, &content->nam_and_val[0],
+		&content->nam_and_val[1]);
 	if (!content->nam_and_val[0] || !content->nam_and_val[1])
 	{
 		ft_lstclear(list, ft_clear_env);
 		free(content);
 		return (false);
 	}
-	// condition checking env_name == '_', path to env
-	ft_lstadd_back(list, ft_lstnew(content)); // adding content to the list
+	ft_lstadd_back(list, ft_lstnew(content));
 	return (true);
 }
 
@@ -77,16 +73,13 @@ bool	env_init(t_global *global, char **envp)
 	i = -1;
 	while (envp[++i])
 	{
-		if(!save_envp_to_list(&list, envp[i]))
+		if (!save_envp_to_list(&list, envp[i]))
 		{
-			// here we shouldn't free() (probably)
-			// because save_envp_to_list() already does it
 			printf("save_envp_to_global() failed");
 			return (false);
 		}
-		//break;
 	}
-	global->enviro = list;	//OK
+	global->enviro = list;
 	return (true);
 }
 
@@ -97,8 +90,9 @@ void	env_update(t_global *global, const char *name, const char *value)
 	current = global->enviro;
 	while (current)
 	{
-		if (ft_strncmp(((t_enviro *)current->content)->nam_and_val[0], name, 
-			ft_strlen(((t_enviro *)current->content)->nam_and_val[0]) + 1) == 0)
+		if (ft_strncmp(((t_enviro *)current->content)->nam_and_val[0], name,
+				ft_strlen(((t_enviro *)current->content)->nam_and_val[0])
+				+ 1) == 0)
 		{
 			if (((t_enviro *)current->content)->nam_and_val[1])
 				free(((t_enviro *)current->content)->nam_and_val[1]);
@@ -126,20 +120,12 @@ char	**env_array_from_enviro(t_global *global)
 	{
 		env = (t_enviro *)node->content;
 		result_arr[i] = ft_calloc(ft_strlen(env->nam_and_val[0])
-				+ ft_strlen(env->nam_and_val[1]) + 2, sizeof(char)); //allocate mem
+				+ ft_strlen(env->nam_and_val[1]) + 2, sizeof(char));
 		ft_strlcat(result_arr[i], env->nam_and_val[0], ft_strlen(result_arr[i])
-				+ ft_strlen(env->nam_and_val[0]));
+			+ ft_strlen(env->nam_and_val[0]));
 		ft_strlcat(result_arr[i], "=", ft_strlen(result_arr[i] + 1));
 		ft_strlcat(result_arr[i], env->nam_and_val[1], ft_strlen(result_arr[i])
-				+ ft_strlen(env->nam_and_val[1]));
-
-		// ft_strlcat(result_arr[i], env->nam_and_val[0], 2000);
-		// ft_strlcat(result_arr[i], "=", 2000);
-		// ft_strlcat(result_arr[i], env->nam_and_val[1], 2000);
-		
-				// result_arr[i] = ft_strjoin(ft_strjoin(env->nam_and_val[0], "="),
-				// 		env->nam_and_val[0]);
-		//if it doesn't work, use ft_strlcat()
+			+ ft_strlen(env->nam_and_val[1]));
 		node = node->next;
 		i++;
 	}
