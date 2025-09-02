@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 16:16:07 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 21:58:35 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:02:24 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ void	child_process(t_global *global, int i, int pipe_n)
 		exit(0);
 	ft_builtins(global, i);
 	envtemp = env_array_from_enviro(global);
-	printf("PATH=%s",getenv("PATH"));	//DEL
 	target = find_path(global, i);
-	printf("\ntarget=%s", target);	//DEL
 	if (global->command[i].arg[0] != NULL)
 		execve(target, global->command[i].arg, envtemp);
 	perror("minishell: command not found");

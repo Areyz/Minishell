@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 18:43:02 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 21:15:36 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:02:04 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ char	*next_folder(t_global *global, int *offset)
 	if (*offset + len >= cap)
 		return (result);
 	while (str[*offset + len] != ':' && *offset + len < cap)
+	{
 		len++;
-	ft_strlcpy(result, &str[*offset], len);
+	}
+		ft_strncpy(result, &str[*offset], len);
 	*offset = *offset + len + 1;
 	return (result);
 }

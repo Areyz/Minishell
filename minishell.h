@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 21:20:12 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:01:03 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,5 +185,7 @@ char	*find_sub_path(t_global *global, int i);
 char	*multicat(char	**input);
 char	*next_folder(t_global *global, int *offset);
 char	*find_env_val(char *var, t_list *env_list, unsigned int limit);
+
+char	*ft_strncpy(char *dest, const char *src, size_t n);
 
 #endif
