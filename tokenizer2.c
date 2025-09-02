@@ -6,7 +6,7 @@
 /*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:55:07 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/09/01 21:01:28 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:19:05 by mgalecki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**str_array_realloc(char **old, size_t add_slots)
 		i++;
 	new = malloc(sizeof(char *) * (i + add_slots + 1));
 	if (!new)
-		return(NULL);
+		return (NULL);
 	j = 0;
 	while (j < i)
 	{
@@ -77,7 +77,8 @@ void	question_mark(t_token *t, t_global *s)
 	}
 	t->str++;
 	exitcode_str = ft_itoa(s->last_exit_code);
-	ft_strlcat(&t->array[t->word_i][t->letter_i], exitcode_str, t->maxc - t->letter_i);
+	ft_strlcat(&t->array[t->word_i][t->letter_i],
+		exitcode_str, t->maxc - t->letter_i);
 	t->letter_i += ft_strlen(exitcode_str);
 	free(exitcode_str);
 }
