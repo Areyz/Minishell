@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalecki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:55:35 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/09/02 19:29:26 by mgalecki         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:33:05 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	char_check(t_token *t)
 	t->modemem = t->mode;
 	if (*t->str == ' ')
 		t->mode = SPACE2;
-	else if(*t->str == '<' || *t->str == '>')
+	else if (*t->str == '<' || *t->str == '>')
 		t->mode = REDIR;
-	else if(*t->str == '|')
+	else if (*t->str == '|')
 		t->mode = PIPE;
 	else
 		t->mode = WORD;
@@ -82,8 +82,6 @@ void	char_check(t_token *t)
 
 void	process_char(t_token *t, t_global *s)
 {
-	// (void)t;	//temporarly foe tests - to be deleted
-	// (void)s;	//temporarly foe tests - to be deleted
 	if (*t->str == '$' && t->quote != 39 && t->letter_i < t->maxc)
 	{
 		t->str++;
@@ -112,7 +110,7 @@ void	process_char(t_token *t, t_global *s)
 tokenize() - takes the shell input string and splits it into 
 tokens (words, pipes, redirections, quoted strings, etc.).
 */
-char **tokenize(t_global *s)
+char	**tokenize(t_global *s)
 {
 	t_token	t;
 

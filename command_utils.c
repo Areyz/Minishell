@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 19:45:59 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 21:07:11 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:32:15 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	check_initial_pipe(t_global *global)
 {
-	if (global->token_array[0] && ft_strncmp(global->token_array[0], "|", 1) == 0)
+	if (global->token_array[0] && ft_strncmp(global->token_array[0],
+			"|", 1) == 0)
 	{
 		printf("minishell: syntax error near unexpected token '|'\n");
 		return (1);

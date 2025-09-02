@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:35:58 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/09/01 20:51:40 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:30:51 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	lexer(t_global	*global)
 {
 	alloc_commands(global);
 	redir_parse(global);
-	cut_args(global);	
+	cut_args(global);
 }
 
 /*
@@ -38,7 +38,7 @@ int	get_and_validate_input(t_global *global)
 		return (2);
 	}
 	add_history(global->input);
-	return(1);
+	return (1);
 }
 
 int	process_and_execute(t_global *global)
