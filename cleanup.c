@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 19:46:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/01 20:54:02 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:26:33 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 void	ft_clear_env_list(t_list *node)
 {
 	t_enviro	*content;
+
 	while (node)
 	{
 		content = (t_enviro *)node->content;
 		if (!content)
-			return;
+			return ;
 		if (content->nam_and_val)
 		{
 			free(content->nam_and_val[0]);
@@ -27,7 +28,7 @@ void	ft_clear_env_list(t_list *node)
 			free(content->nam_and_val);
 		}
 		free(content);
-			node = node->next;
+		node = node->next;
 	}
 	free(node);
 }
@@ -35,11 +36,11 @@ void	ft_clear_env_list(t_list *node)
 /* Freeing list of [env_name, env_val] */
 void	ft_clear_env(void *env_node)
 {
-	t_enviro *content;
+	t_enviro	*content;
 
 	content = (t_enviro *)env_node;
 	if (!content)
-		return;
+		return ;
 	if (content->nam_and_val)
 	{
 		free(content->nam_and_val[0]);
@@ -47,27 +48,6 @@ void	ft_clear_env(void *env_node)
 		free(content->nam_and_val);
 	}
 	free(content);
-	// content = (t_enviro *) env_node;
-	// if (!content)
-	// 	return ;
-	// if (content->nam_and_val[0])
-	// {
-	// 	free(content->nam_and_val[0]);
-	// 	content->nam_and_val[0] = NULL;
-	// }
-	// if (content->nam_and_val[1])
-	// {
-	// 	free(content->nam_and_val[1]);
-	// 	content->nam_and_val[1] = NULL;
-	// }
-	// if (content->nam_and_val)
-	// {
-	// 	free(content->nam_and_val);
-	// 	content->nam_and_val = NULL;
-	// }
-	// if (content)
-	// 	free(content);
-	// env_node = NULL;
 }
 
 void	free_string_array(char **arg)
@@ -111,23 +91,4 @@ void	safefree(void *ptr)
 {
 	if (ptr)
 		free(ptr);
-}
-
-void	free_all(t_global *global)
-{
-	if(global->input)
-	{
-		free(global->input);
-		global->input = NULL;
-	}
-	if (global->command)
-	{
-		free_commands(global);
-		global->command = NULL;
-	}
-	if (global->token_array)
-	{
-		free_string_array(global->token_array);
-		global->token_array = NULL;
-	}
 }

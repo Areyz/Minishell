@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:57:05 by mgalecki          #+#    #+#             */
-/*   Updated: 2025/09/02 19:00:46 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:28:09 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ void	*safe_malloc(size_t size)
 /*Initializing global struct*/
 bool	global_init(t_global *global, char **envp)
 {
-	if(!env_init(global, envp))
+	if (!env_init(global, envp))
 	{
 		ft_putstr_fd("env_init failed\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	//initialization of other elements of our 'global' struct
 	global->input = NULL;
 	return (true);
 }
@@ -53,7 +52,7 @@ If process_and_execute reports 2, the loop just skips
 to the next prompt instead of continuing execution.
 */
 
-void minishell_loop(t_global *global)
+void	minishell_loop(t_global *global)
 {
 	int	loop_status;
 
@@ -61,14 +60,13 @@ void minishell_loop(t_global *global)
 	{
 		loop_status = get_and_validate_input(global);
 		if (loop_status == 0)
-			break;
+			break ;
 		if (loop_status == 2)
-			continue;
+			continue ;
 		loop_status = process_and_execute(global);
 		if (loop_status == 2)
-			continue;
+			continue ;
 	}
-	//free
 }
 
 /*
@@ -78,18 +76,15 @@ rl_catch_signals = 0; - setup for handle signals by sigaction
 int	main(int argc, char **argv, char **envp)
 {
 	t_global	global;
-	// envp - contains the list of all env variables
-	//global = NULL;
+
 	(void) argc;
 	(void) argv;
-
-	if (global_init(&global, envp)) 	//this prepares our 'global' struct
+	if (global_init(&global, envp))
 	{
 		init_signal();
 		rl_catch_signals = 0;
 		minishell_loop(&global);
 	}
-
 	free((&global)->input);
 	free_global(&global);
 	return (0);

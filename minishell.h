@@ -6,7 +6,7 @@
 /*   By: kjamrosz <kjamrosz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:33:09 by kjamrosz          #+#    #+#             */
-/*   Updated: 2025/09/02 19:01:03 by kjamrosz         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:29:09 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ typedef struct s_redir
 
 typedef struct s_command
 {
-    char	*name;
+	char	*name;
 	int		arg_num;
-    char	**arg;
+	char	**arg;
 	int		redir_count;
 	t_redir	*redir;
-}   t_command;
+}	t_command;
 
 typedef struct s_token
 {
@@ -135,11 +135,11 @@ void	init_signal(void);
 int		process_and_execute(t_global *global);
 
 /*lexer*/
-void	lexer (t_global	*global);
+void	lexer(t_global	*global);
 void	*safe_malloc(size_t size);
 void	alloc_commands(t_global *global);
 void	init_commands(t_global *global);
-void 	init_iterators(int *tkn_i, int *arg_i, int *cmd_i);
+void	init_iterators(int *tkn_i, int *arg_i, int *cmd_i);
 void	handle_pipe_token(t_global *global, int *cmd_i, int *arg_i, int *tkn_i);
 void	fill_args_helper(t_global *global, int i, int k, int *h);
 void	fill_args(t_global *global);
@@ -159,7 +159,7 @@ int		create_pipes(t_global *global, int pipe_n);
 void	close_pipes(t_global *global, int pipe_n);
 
 /* build-in commands and env_utils */
-int	ft_env(t_global *global);
+int		ft_env(t_global *global);
 int		ft_export(t_global *global, t_command *cmd);
 int		ft_pwd(void);
 void	ft_exit(t_global *global);
