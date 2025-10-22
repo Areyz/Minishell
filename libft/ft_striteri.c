@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 19:19:20 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 21:18:40 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/10 13:24:33 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/10 13:24:34 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	unsigned int	i;
+	size_t	i;
 
 	if (!s || !f)
 		return ;
@@ -25,3 +25,21 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 		i++;
 	}
 }
+
+/*
+#include <stdio.h>
+
+void func(unsigned int i, char *c)
+{
+	printf("%c\n", c[i]);
+}
+
+int main()
+{
+	char *str = "abcdefgh";
+	printf("str = %s\n", str);
+	ft_striteri(str, &func);
+	printf("newstr = %s\n", str);
+	return 0;
+}
+*/

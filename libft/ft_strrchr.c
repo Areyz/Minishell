@@ -3,27 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 19:56:31 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 20:03:42 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/05 12:59:46 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/05 12:59:46 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strrchr(const char *str, int c)
 {
-	char	*last_occurrence;
+	char			*temp;
+	char			*res;
+	unsigned char	cc;
 
-	last_occurrence = NULL;
-	while (*s)
+	res = NULL;
+	temp = (char *) str;
+	cc = (unsigned char) c;
+	if (c == 0 && *temp)
+		return (temp + ft_strlen(temp));
+	if (c == 0 && !temp)
+		return (temp);
+	while (*temp)
 	{
-		if (*s == (char)c)
-			last_occurrence = (char *)s;
-		s++;
+		if (*temp == cc)
+			res = temp;
+		temp++;
 	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (last_occurrence);
+	if (c == *temp)
+		return (temp);
+	return (res);
 }
+
+/*
+#include <stdio.h>
+int main()
+{
+	char c = 'l';
+	char* str = "Hello world!";
+	printf("%s\n", ft_strrchr(str, c));
+	return 0;
+}
+*/

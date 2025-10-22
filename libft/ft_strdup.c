@@ -3,25 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 19:08:13 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 19:23:23 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/06 17:32:27 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/06 17:32:27 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *src)
 {
-	char	*copy;
-	size_t	len;
+	char	*dest;
+	char	*tempdest;
 
-	len = ft_strlen(s1);
-	copy = (char *)malloc(sizeof(char) * (len + 1));
-	if (!copy)
+	dest = malloc(sizeof(char) * (ft_strlen(src) + 1));
+	if (!dest)
 		return (NULL);
-	ft_memcpy(copy, s1, len);
-	copy[len] = '\0';
-	return (copy);
+	tempdest = dest;
+	while (*src)
+		*dest++ = *src++;
+	*dest = '\0';
+	return (tempdest);
 }
+
+/*
+#include <unistd.h>
+#include <stdio.h>
+int main () 
+{
+   char *str = "";//works with this
+   //doesn't work when we use char *c = "Hello";
+
+   printf("string: %s\n",str);
+
+   char *newstr = ft_strdup(str);
+   printf("newstr: %s\n", newstr);
+   
+   return(0);
+}
+*/

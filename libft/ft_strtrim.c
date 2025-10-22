@@ -3,51 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 19:58:57 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 20:00:09 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/10 13:22:36 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/10 13:22:37 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static char	*ft_strncpy(char *dest, const char *src, int len)
+static int	is_in_set(char c, const char *set)
 {
 	int	i;
 
 	i = 0;
-	while (i < len)
+	while (set[i])
 	{
-		dest[i] = src[i];
+		if (set[i] == c)
+			return (1);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (0);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*result;
+	char	*newstr;
 	int		start;
 	int		end;
-	int		result_len;
+	int		i;
 
-	start = 0;
 	if (!s1 || !set)
 		return (NULL);
+	start = 0;
 	end = ft_strlen(s1) - 1;
-	while (s1[start] && ft_strchr(set, s1[start]))
+	while (s1[start] && is_in_set(s1[start], set))
 		start++;
-	while (end >= start && ft_strchr(set, s1[end]))
+	while (end >= 0 && is_in_set(s1[end], set))
 		end--;
-	result_len = end - start + 1;
-	if (result_len <= 0)
+	if (start > end)
 		return (ft_strdup(""));
-	result = (char *) malloc(result_len + 1);
-	if (!result)
+	newstr = malloc(sizeof(char) * (end - start + 2));
+	if (!newstr)
 		return (NULL);
-	ft_strncpy(result, &s1[start], result_len);
-	result[result_len] = '\0';
-	return (result);
+	i = 0;
+	while (start <= end)
+		newstr[i++] = s1[start++];
+	newstr[i] = '\0';
+	return (newstr);
 }
+
+/*
+#include <stdio.h>
+int main()
+{
+	char *set = "abc";
+	char *str = "aaccbbHellobbacca";
+	
+	printf("original string: %s\n", str);
+	printf("set of unwanted chars: %s\n", set);
+	
+	printf("New string: %s\n", ft_strtrim(str, set));
+
+	return 0;
+}
+*/

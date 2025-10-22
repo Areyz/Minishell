@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 11:25:30 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 22:08:30 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/03 14:48:06 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/03 14:48:10 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,40 @@
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	size_t	i;
+	unsigned char	*destination;
+	unsigned char	*source;
 
-	i = 0;
 	if (!dest && !src)
-		return (NULL);
-	if (dest != src)
+		return (dest);
+	destination = dest;
+	source = (void *) src;
+	while (n > 0)
 	{
-		while (i < n)
-		{
-			((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
-			i++;
-		}
+		*destination = *source;
+		destination++;
+		source++;
+		n--;
 	}
 	return (dest);
 }
+
+/*
+#include <string.h>
+#include <stdio.h>
+
+int main () 
+{
+   char str[6] = "Hello";
+   char dst[6] = "abcde";
+
+   printf("%s\n",str);
+   printf("%s\n",dst);
+
+   ft_memcpy(dst, str, 3);
+   printf("str = %s\n",str);
+   printf("dst = %s\n",dst);
+
+   
+   return(0);
+}
+*/

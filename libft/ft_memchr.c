@@ -3,25 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 12:06:27 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 22:14:36 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/06 14:26:24 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/06 14:26:24 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *str, int c, size_t n)
 {
-	size_t	index;
+	unsigned char	*temp;
+	size_t			i;
+	unsigned char	uc;
 
-	index = 0;
-	while (index < n)
+	temp = (unsigned char *) str;
+	uc = (unsigned char) c;
+	i = 0;
+	while (i < n)
 	{
-		if (((unsigned char *)s)[index] == (unsigned char)c)
-			return (((unsigned char *)s) + index);
-		index++;
+		if (*temp == uc)
+			return (temp);
+		temp++;
+		i++;
 	}
 	return (NULL);
 }
+
+/*
+#include <stdio.h>
+int main()
+{
+	char c = '\0';
+	char* str = "qwerty\0asd";
+	char* newstr = ft_memchr(str, c, 10);
+	printf("%s\n", newstr);
+	newstr++;
+	printf("%s\n", newstr);
+	return 0;
+}
+*/

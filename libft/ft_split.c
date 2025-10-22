@@ -3,102 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgolasze <mgolasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjamrosz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 18:57:52 by mgolasze          #+#    #+#             */
-/*   Updated: 2025/01/18 21:12:32 by mgolasze         ###   ########.fr       */
+/*   Created: 2024/12/10 13:23:28 by kjamrosz          #+#    #+#             */
+/*   Updated: 2024/12/10 13:23:28 by kjamrosz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-static char	**free_array(char **ptr, int i)
+static int	num_of_words(const char *s, char c)
 {
-	while (i > 0)
+	int	elements;
+
+	elements = 0;
+	while (*s)
 	{
-		i--;
-		free(ptr[i]);
+		if (*s != c)
+		{
+			elements++;
+			while (*(s + 1) && *s != c)
+				s++;
+		}
+		s++;
 	}
-	free(ptr);
-	return (0);
+	return (elements);
 }
 
-static int	ft_count_words(char const *str, char c)
+static int	find_end_index(char const *s, char c)
 {
 	int	i;
-	int	count;
 
 	i = 0;
-	count = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == c)
-			i++;
-		else
-		{
-			count++;
-			while (str[i] && str[i] != c)
-				i++;
-		}
-	}
-	return (count);
+	while (s[i] != c && s[i])
+		i++;
+	return (i);
 }
 
-static char	*ft_putword(char *word, char const *s, int i, int word_len)
+static int	array_creation(char **words, char const *s, char c, int words_num)
 {
-	int	j;
-
-	j = 0;
-	while (word_len > 0)
-	{
-		word[j] = s[i - word_len];
-		j++;
-		word_len--;
-	}
-	word[j] = '\0';
-	return (word);
-}
-
-static char	**ft_split_words(char const *s, char c, char **s2, int num_words)
-{
+	int	start_index;
+	int	end_index;
 	int	i;
-	int	word;
-	int	word_len;
 
+	start_index = 0;
 	i = 0;
-	word = 0;
-	word_len = 0;
-	while (word < num_words)
+	while (i < words_num)
 	{
-		while (s[i] && s[i] == c)
-			i++;
-		while (s[i] && s[i] != c)
+		while (s[start_index] == c)
+			start_index++;
+		end_index = find_end_index(s + start_index, c);
+		words[i] = ft_substr(s, start_index, end_index);
+		if (!words[i])
 		{
-			i++;
-			word_len++;
+			while (i-- > 0)
+				free(words[i]);
+			free(words);
+			return (0);
 		}
-		s2[word] = (char *)malloc(sizeof(char) * (word_len + 1));
-		if (!s2)
-			return (free_array(s2, word));
-		ft_putword(s2[word], s, i, word_len);
-		word_len = 0;
-		word++;
+		start_index += end_index;
+		i++;
 	}
-	s2[word] = 0;
-	return (s2);
+	words[i] = NULL;
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char			**s2;
-	unsigned int	num_words;
+	char	**words;
+	int		words_num;
 
 	if (!s)
-		return (0);
-	num_words = ft_count_words(s, c);
-	s2 = (char **)malloc(sizeof(char *) * (num_words + 1));
-	if (!s2)
-		return (0);
-	s2 = ft_split_words(s, c, s2, num_words);
-	return (s2);
+		return (NULL);
+	words_num = num_of_words(s, c);
+	words = (char **)malloc(sizeof(char *) * (words_num + 1));
+	if (!words)
+		return (NULL);
+	if (array_creation(words, s, c, words_num) == 0)
+		return (NULL);
+	return (words);
 }
+
+/*
+
+#include <stdio.h>
+int main()
+{
+	char *str = "xxxHelloxxworldxxabc";
+	char c = 'x';
+
+	printf("str: %s\n", str);
+	printf("delim char: %c\n", c);
+	char **res = ft_split(str, c);
+	int i = 0;
+	while (i < 3)
+	{
+		printf("%s\n", res[i]);
+		i++;
+	}
+
+	return 0;
+}
+*/
