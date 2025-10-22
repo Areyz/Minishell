@@ -41,11 +41,12 @@ int	export_replace(t_global *global, t_token *token)
 
 	if (ft_strncmp(global->content, token->history, ft_strlen(token->history)))
 		to_replace = get_key(token->history);
-	while(token -> next != NULL)
+	while(global != NULL)
 	{
 		if (ft_strncmp(global->content, to_replace, ft_strlen(to_replace)))
 		{
-			global->content = realloc(sizeof(char *) * (ft_strlen(to_replace)));
+			free(global->content)
+			global->content = ft_strdup(token->history);
 			if (!global->content)
 				error_exit(global, ENOMEM);
 			return (1);
